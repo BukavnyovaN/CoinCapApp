@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PATHS } from "../../../../shared/paths";
+import { PATHS } from "../../../../common/paths";
 import { FC } from "react";
 import { useGetAssetsQuery } from "../../../../services/coincap";
 import "./Header.scss";
