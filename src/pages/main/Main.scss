@@ -1,0 +1,58 @@
+@import "../../sass/constants.scss";
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.tr {
+  border-bottom: 1px solid $color-dark;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  &:first-child {
+    text-align: center;
+  }
+}
+
+img {
+  max-width: 24px;
+  max-height: auto;
+}
+
+button {
+  background-color: cadetblue;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Monserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover,
+button:focus {
+  background-color: rgb(73, 129, 131);
+}
