@@ -9,10 +9,8 @@ import { Chart } from "../../components";
 const Currency: FC = () => {
   const { currencyId } = useParams();
   const { data: asset, isLoading } = useGetAssetQuery({ id: currencyId });
-  console.log("asset", asset);
 
   const { data: assetHistory } = useGetAssetHistoryQuery({ id: currencyId });
-  console.log("assetHistory", assetHistory);
 
   const labelsChart = assetHistory?.data.map(({ time }) =>
     new Date(time).toLocaleString("en-US", {
@@ -22,13 +20,9 @@ const Currency: FC = () => {
     })
   );
 
-  console.log(labelsChart);
-
   const dataChart = assetHistory?.data.map(({ priceUsd }) =>
     Number(priceUsd).toFixed(2)
   );
-
-  console.log(dataChart);
 
   return (
     <>
