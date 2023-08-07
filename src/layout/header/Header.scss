@@ -1,18 +1,19 @@
-@import "../../../../sass/constants.scss";
+@import '../../sass/constants.scss';
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
   gap: $base * 20;
   padding: $base * 2 0;
-  background-color: cadetblue;
+  background-color: #2a5f61;
 }
 
 .header-currencies {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #ffffff;
   flex-wrap: wrap;
   gap: $base;
 
@@ -25,9 +26,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: $color-white;
   gap: $base;
   padding: $base;
-  color: $color-dark;
 }
 
 .header-currency__name-wrapper {
@@ -36,12 +37,18 @@
   gap: $base;
 }
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .header-currency__name {
   display: flex;
   align-items: flex-start;
   justify-content: right;
   gap: $base;
-  color: $color-dark;
+  color: $color-white;
   text-align: center;
   transition: all $transition;
 
@@ -59,6 +66,9 @@
 
 .logo-wrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   width: $base * 40;
   color: #000;
 }
@@ -66,4 +76,10 @@
 .logo {
   width: 100%;
   height: auto;
+}
+
+P {
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
 }

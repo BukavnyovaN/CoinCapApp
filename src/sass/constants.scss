@@ -1,9 +1,9 @@
-@use "sass:math";
+@use 'sass:math';
 
 // === MIXINS ===
 
 @mixin roboto {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
 }
 
 // === / MIXINS ===
@@ -64,9 +64,9 @@ $color-grey: rgba(196, 196, 196, 1);
 $color-disabled: rgba(130, 130, 130, 1);
 $color-border: rgba(189, 189, 189, 1);
 $color-body: rgba(217, 217, 217, 1);
-$color-link: #3ac7b2;
+$color-link: #387e80;
 $color-visited: rgba(155, 81, 224, 1);
-$color-primary: rgb(46, 143, 127);
+$color-primary: #2a5f61;
 
 $breakpoint-xxs-min: 320px;
 $breakpoint-xs-min: 480px;
