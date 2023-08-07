@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import { Layout, Main, Currency } from "./pages";
-import { PATHS } from "./common/paths";
-import React from "react";
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Main, Currency } from './pages';
+import { PATHS } from './constants/paths';
+import { Layout } from './layout/Layout';
 
 const App: FC = () => {
   const { main, currency, any } = PATHS;

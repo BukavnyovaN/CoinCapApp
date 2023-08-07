@@ -1,8 +1,8 @@
-import React from "react";
-import { FC, useState } from "react";
-import { useGetAssetsQuery } from "../../services/coincap";
-import { TableHead, TableRow, PrimaryButton } from "../../components";
-import "./Main.scss";
+import React from 'react';
+import { FC, useState } from 'react';
+import { useGetAssetsQuery } from '../../API/coincap';
+import { TableHead, TableRow, PrimaryButton } from '../../components';
+import './Main.scss';
 
 const Main: FC = () => {
   const [limit, setLimit] = useState<number>(20);
@@ -15,7 +15,7 @@ const Main: FC = () => {
 
   return (
     <div>
-      <table className="table">
+      <table className='table'>
         <TableHead />
         <tbody>
           {isLoading && (
@@ -57,7 +57,7 @@ const Main: FC = () => {
             )}
         </tbody>
       </table>
-      <PrimaryButton description="Load More" onClick={increaseLimit} />
+      <PrimaryButton description='Load More' onClick={increaseLimit} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import { TableRow } from "./tableRow/TableRow";
-import { TableHead } from "./tableHead/TableHead";
-import { PrimaryButton } from "./buttons";
-import { Chart } from "./chart/Chart";
+import { TableRow } from './table/tableRow/TableRow';
+import { TableHead } from './table/tableHead/TableHead';
+import { PrimaryButton, SecondaryButton } from './buttons';
+import { Chart } from './chart/Chart';
 
-export { TableRow, PrimaryButton, Chart, TableHead };
+export { TableRow, PrimaryButton, Chart, TableHead, SecondaryButton };

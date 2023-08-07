@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { coinCapApi } from "../services/coincap";
+import { configureStore } from '@reduxjs/toolkit';
+import { coinCapApi } from '../API/coincap';
 
 export const store = configureStore({
   reducer: {

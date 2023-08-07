@@ -1,0 +1,51 @@
+@import '../../../sass/constants.scss';
+
+.table-currency__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $color-black;
+  gap: $base;
+  padding: $base;
+}
+
+.table-currency__name-wrapper {
+  display: flex;
+  align-items: right;
+  gap: $base;
+}
+
+.table-currency__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $base;
+  color: $color-black;
+  text-align: center;
+  transition: all $transition;
+
+  &:hover {
+    div {
+      text-decoration: underline;
+    }
+  }
+}
+
+.table-currency__icon {
+  width: $base * 4;
+  height: $base * 4;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: $base * 40;
+  color: #000;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
