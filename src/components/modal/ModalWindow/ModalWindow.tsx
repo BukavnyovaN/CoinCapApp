@@ -8,12 +8,12 @@ import './ModalWindow.scss';
 
 const ModalWindow: FC = () => {
   const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
-  const { id, name, symbol } = useAppSelector(
+  const { id, name, symbol, priceUsd } = useAppSelector(
     ({ currencyInfo }) => currencyInfo
   );
   const dispatch = useAppDispatch();
 
-  const [amount, setAmount] = useState<number>(100);
+  const [amount, setAmount] = useState<number>(0);
 
   const closeModal = () => {
     dispatch(close());
@@ -27,13 +27,12 @@ const ModalWindow: FC = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(addCurrencyInfoToCart({ id, name, symbol, amount }));
+    dispatch(addCurrencyInfoToCart({ id, name, symbol, priceUsd, amount }));
     closeModal();
   };
 
   return (
     <>
-      {/* <h2>{`${name} (${symbol})`}</h2> */}
       <div
         className={`modal_window-wrapper ${
           !isModalAddOpen ? 'display_none' : ''

@@ -6,6 +6,7 @@ import {
   addCurrencyId,
   addCurrencyName,
   addCurrencySymbol,
+  addCurrencyPriceUsd,
 } from '../../store/currencyInfoSlice';
 import { useGetAssetQuery, useGetAssetHistoryQuery } from '../../API/coincap';
 import { Chart, SecondaryButton, ModalWindow } from '../../components';
@@ -34,6 +35,7 @@ const Currency: FC = () => {
     dispatch(addCurrencyId(asset!.data.id!));
     dispatch(addCurrencyName(asset!.data.name));
     dispatch(addCurrencySymbol(asset!.data.symbol));
+    dispatch(addCurrencyPriceUsd(asset!.data.priceUsd));
     dispatch(open());
   };
 

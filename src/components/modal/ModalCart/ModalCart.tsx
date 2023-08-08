@@ -13,6 +13,7 @@ const ModalCart: FC = () => {
   const closeModal = () => {
     dispatch(close());
   };
+
   return (
     <>
       <div
@@ -24,7 +25,7 @@ const ModalCart: FC = () => {
           <h2>Your portfolio is empty... Add more currency!</h2>
         )}
         {modalCartInfo &&
-          modalCartInfo.map(({ id, name, symbol, amount }) => {
+          modalCartInfo.map(({ id, name, symbol, priceUsd, amount }) => {
             return (
               <div key={id} className='flex_space-between'>
                 <Link
@@ -43,9 +44,11 @@ const ModalCart: FC = () => {
                   </div>
                 </Link>
                 <div>{`Amount: ${amount}`}</div>
+                <div>{`Price: ${Math.floor(+priceUsd!) * amount!}`}</div>
               </div>
             );
           })}
+        <h2>Total: </h2>
         <SecondaryButton description='x' onClick={closeModal} />
       </div>
       <div

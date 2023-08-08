@@ -5,6 +5,7 @@ import {
   addCurrencyId,
   addCurrencyName,
   addCurrencySymbol,
+  addCurrencyPriceUsd,
 } from '../../../store/currencyInfoSlice';
 import { SecondaryButton } from '../../buttons';
 import { useAppDispatch } from '../../../hooks/hooks';
@@ -29,6 +30,7 @@ const TableRow: FC<IAssets> = ({
     dispatch(addCurrencyId(id!));
     dispatch(addCurrencyName(name));
     dispatch(addCurrencySymbol(symbol));
+    dispatch(addCurrencyPriceUsd(priceUsd));
     dispatch(open());
   };
   return (
