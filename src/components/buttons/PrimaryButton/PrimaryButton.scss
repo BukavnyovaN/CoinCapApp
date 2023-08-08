@@ -2,9 +2,11 @@
 
 .button-primary {
   display: block;
-  width: $base * 50;
+  width: 50%;
   margin: $base * 2 auto;
   padding: $base * 2;
+  font-size: $fs-xxl;
+  font-weight: $fw-medium;
   border-radius: $base * 4;
   background-color: $color-primary;
   text-align: center;

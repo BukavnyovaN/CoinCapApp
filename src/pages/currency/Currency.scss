@@ -1,4 +1,49 @@
 @import '../../sass/constants.scss';
 
 .currency-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.currency-details_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $base * 3;
+  margin-top: $base * 2;
+  padding: $base * 2;
+  color: $color-dark;
+  border-radius: $base;
+
+  .button-secondary {
+    width: $base * 16;
+    height: $base * 16;
+    font-size: $fs-xxl;
+    font-weight: $fw-medium;
+  }
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: $base * 2;
+  width: 15%;
+  padding: $base * 2;
+  border-radius: $base;
+  // background-color: $color-white;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  color: $color-dark;
+  text-align: center;
+
+  @media (max-width: $breakpoint-md-min) {
+    width: 15%;
+  }
+
+  @media (max-width: $breakpoint-md-min) {
+    width: 15%;
+  }
 }

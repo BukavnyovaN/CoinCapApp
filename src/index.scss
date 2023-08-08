@@ -2,9 +2,13 @@
 @import './sass/constants.scss';
 
 body {
-  @include monserrat;
+  @include montserrat;
   color: $color-dark;
   scroll-behavior: smooth;
+}
+
+.body_overflow {
+  overflow-y: hidden;
 }
 
 .display_none {
@@ -22,9 +26,13 @@ body {
 }
 
 .wrapper {
-  max-width: $base * 480;
-  width: 95%;
+  max-width: $base * 314 + px;
+  width: 82vw;
   margin: 0 auto;
+
+  @media (max-width: $breakpoint-lg-min) {
+    width: 97vw;
+  }
 }
 
 h1,
@@ -37,7 +45,7 @@ button,
 input,
 select,
 textarea {
-  @include monserrat;
+  @include montserrat;
   margin: 0;
 }
 
