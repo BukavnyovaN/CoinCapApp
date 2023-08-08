@@ -1,12 +1,15 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { IAssets } from '../../../API/coincap';
-import './TableRow.scss';
+import {
+  addCurrencyId,
+  addCurrencyName,
+  addCurrencySymbol,
+} from '../../../store/currencyInfoSlice';
 import { SecondaryButton } from '../../buttons';
 import { useAppDispatch } from '../../../hooks/hooks';
-import { open } from '../../../store/modalSlice';
-
-import React from 'react';
+import { open } from '../../../store/modalWindowSlice';
+import './TableRow.scss';
 
 const TableRow: FC<IAssets> = ({
   id,
@@ -22,25 +25,28 @@ const TableRow: FC<IAssets> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const openModal = () => {
+  const handleCurrency = () => {
+    dispatch(addCurrencyId(id!));
+    dispatch(addCurrencyName(name));
+    dispatch(addCurrencySymbol(symbol));
     dispatch(open());
   };
   return (
     <tr>
       <td colSpan={1}>{rank}</td>
       <td colSpan={2} className='table-currency__wrapper'>
-        <div className='table-currency__name-wrapper'>
+        <Link to={`/${id}`} className='table-currency__name-wrapper'>
           <img
             src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
             alt={symbol}
             className='table-currency__icon'
           />
-          <Link to={`/${id}`} className='table-currency__name'>
+          <div className='table-currency__name'>
             <div>{`${name}`}</div>
             <div>{`${symbol}`}</div>
-          </Link>
-        </div>
-        <SecondaryButton description='Add' onClick={openModal} />
+          </div>
+        </Link>
+        <SecondaryButton description='Add' onClick={handleCurrency} />
       </td>
       <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
         style: 'currency',

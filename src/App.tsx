@@ -7,17 +7,18 @@ import { Layout } from './layout/Layout';
 
 const App: FC = () => {
   const { main, currency, any } = PATHS;
-  const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
+  const isModalWindow = useAppSelector(({ modal }) => modal.value);
+  const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);
 
   useEffect(() => {
     const BODY = document.querySelector('body') as HTMLBodyElement;
 
-    if (isModalAddOpen) {
+    if (isModalWindow || isModalCartOpen) {
       BODY.classList.add('body_overflow');
     } else {
       BODY.classList.remove('body_overflow');
     }
-  }, [isModalAddOpen]);
+  }, [isModalWindow, isModalCartOpen]);
 
   return (
     <Routes>
