@@ -1,24 +1,14 @@
-import { FC, useEffect } from 'react';
-import { useAppSelector } from './hooks/hooks';
+import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Main, Currency } from './pages';
 import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
+import { useOverflow } from './hooks/useOverflow';
 
 const App: FC = () => {
   const { main, currency, any } = PATHS;
-  const isModalWindow = useAppSelector(({ modal }) => modal.value);
-  const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);
 
-  useEffect(() => {
-    const BODY = document.querySelector('body') as HTMLBodyElement;
-
-    if (isModalWindow || isModalCartOpen) {
-      BODY.classList.add('body_overflow');
-    } else {
-      BODY.classList.remove('body_overflow');
-    }
-  }, [isModalWindow, isModalCartOpen]);
+  useOverflow();
 
   return (
     <Routes>

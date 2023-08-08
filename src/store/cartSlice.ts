@@ -9,7 +9,10 @@ export interface ICart {
   amount?: number;
 }
 
-const initialState: ICart[] = [];
+const localStorageInfo = localStorage.getItem('modalCartInfo') || null;
+const initialState: ICart[] = localStorageInfo
+  ? JSON.parse(localStorageInfo)
+  : [];
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -19,7 +22,8 @@ export const cartSlice = createSlice({
       state.push(action.payload);
     },
     parseCurrencyIntoCart: (state, action: PayloadAction<ICart[]>) => {
-      state = action.payload;
+      state = [...action.payload];
+      console.log([...action.payload]);
     },
   },
 });

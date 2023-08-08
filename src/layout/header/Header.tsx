@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hooks';
 import { open } from '../../store/modalCartSlice';
 import { PATHS } from '../../constants/paths';
-import { ModalCart } from '../../components';
+import { ModalCart, Cart } from '../../components';
 import { FC } from 'react';
 import { useGetAssetsQuery } from '../../API/coincap';
 import { Icon } from '@iconify/react';
@@ -53,15 +53,7 @@ const Header: FC = () => {
           />
           <p className='logo-name'>COIN CAP APP</p>
         </Link>
-        <div className='cart-wrapper' onClick={openModalCart}>
-          <Icon
-            className='header-currencies_cart'
-            icon='grommet-icons:money'
-            color='white'
-            width='36'
-            height='36'
-          />
-        </div>
+        <Cart />
       </header>
       <ModalCart />
     </>
