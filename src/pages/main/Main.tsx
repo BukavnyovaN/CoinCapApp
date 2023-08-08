@@ -1,11 +1,20 @@
 import React from 'react';
 import { FC, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useGetAssetsQuery } from '../../API/coincap';
-import { TableHead, TableRow, PrimaryButton } from '../../components';
+import {
+  TableHead,
+  TableRow,
+  PrimaryButton,
+  ModalWindow,
+} from '../../components';
 import './Main.scss';
 
 const Main: FC = () => {
   const [limit, setLimit] = useState<number>(20);
+
+  const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
+  const dispatch = useAppDispatch();
 
   const { data: assets, isLoading } = useGetAssetsQuery({ limit: limit });
 
@@ -58,6 +67,7 @@ const Main: FC = () => {
         </tbody>
       </table>
       <PrimaryButton description='Load More' onClick={increaseLimit} />
+      <ModalWindow />
     </div>
   );
 };

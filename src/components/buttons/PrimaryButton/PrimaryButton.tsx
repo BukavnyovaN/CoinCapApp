@@ -3,7 +3,7 @@ import './PrimaryButton.scss';
 
 interface IPrimaryButton {
   description: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const PrimaryButton: FC<IPrimaryButton> = ({ description, onClick }) => {

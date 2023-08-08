@@ -3,10 +3,15 @@ import './SecondaryButton.scss';
 
 interface ISecondaryButton {
   description: string;
+  onClick: () => void;
 }
 
-const SecondaryButton: FC<ISecondaryButton> = ({ description }) => {
-  return <button className='secondary-button'>{description}</button>;
+const SecondaryButton: FC<ISecondaryButton> = ({ description, onClick }) => {
+  return (
+    <button className='secondary-button' onClick={onClick}>
+      {description}
+    </button>
+  );
 };
 
 export { SecondaryButton };
