@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { IAssets } from '../../../API/coincap';
 import './TableRow.scss';
 import { SecondaryButton } from '../../buttons';
+import { useAppDispatch } from '../../../hooks/hooks';
+import { open } from '../../../store/modalSlice';
 
 import React from 'react';
 
@@ -18,6 +20,11 @@ const TableRow: FC<IAssets> = ({
   volumeUsd24Hr,
   changePercent24Hr,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const openModal = () => {
+    dispatch(open());
+  };
   return (
     <tr>
       <td colSpan={1}>{rank}</td>
@@ -33,7 +40,7 @@ const TableRow: FC<IAssets> = ({
             <div>{`${symbol}`}</div>
           </Link>
         </div>
-        <SecondaryButton description='Add' />
+        <SecondaryButton description='Add' onClick={openModal} />
       </td>
       <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
         style: 'currency',

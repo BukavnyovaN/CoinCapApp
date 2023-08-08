@@ -44,9 +44,15 @@ const Header: FC = () => {
             width='24'
             height='24'
           />
-          <p>COIN CAP APP</p>
+          <p className='logo-name'>COIN CAP APP</p>
         </Link>
-        <Icon icon='grommet-icons:money' color='white' width='36' height='36' />
+        <Icon
+          className='header-currencies_cart'
+          icon='grommet-icons:money'
+          color='white'
+          width='36'
+          height='36'
+        />
       </div>
     </header>
   );

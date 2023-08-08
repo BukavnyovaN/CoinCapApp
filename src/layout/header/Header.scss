@@ -1,11 +1,11 @@
 @import '../../sass/constants.scss';
 
 .header {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  gap: $base * 20;
-  padding: $base * 2 0;
+  justify-content: space-between;
+  padding: $base * 2;
   background-color: #2a5f61;
 }
 
@@ -14,11 +14,14 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  flex-wrap: wrap;
   gap: $base;
 
-  @media (max-width: $breakpoint-xs-min) {
+  @media (max-width: $breakpoint-lg-min) {
     width: min-content;
+    flex-wrap: wrap;
+    font-size: small;
+    gap: 0;
+    justify-content: flex-start;
   }
 }
 
@@ -29,6 +32,9 @@
   color: $color-white;
   gap: $base;
   padding: $base;
+  @media (max-width: $breakpoint-xxs-min) {
+    display: none;
+  }
 }
 
 .header-currency__name-wrapper {
@@ -71,6 +77,19 @@
   gap: 5px;
   width: $base * 40;
   color: #000;
+}
+
+.logo-name {
+  @media (max-width: $breakpoint-xs-min) {
+    display: none;
+  }
+}
+
+.header-currencies_cart {
+  @media (max-width: $breakpoint-xs-min) {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .logo {
