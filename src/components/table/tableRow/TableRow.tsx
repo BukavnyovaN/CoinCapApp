@@ -8,6 +8,9 @@ import {
   addCurrencyPriceUsd,
 } from '../../../store/currencyInfoSlice';
 import { SecondaryButton } from '../../buttons';
+import { convertToMillions } from '../../../utils/convertToMillions';
+import { convertToPercentage } from '../../../utils/convertToPercentage';
+import { convertToThousands } from '../../../utils/convertToThousands';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { open } from '../../../store/modalWindowSlice';
 import './TableRow.scss';
@@ -27,7 +30,7 @@ const TableRow: FC<IAssets> = ({
   const dispatch = useAppDispatch();
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(id!));
+    dispatch(addCurrencyId(id ? id : ''));
     dispatch(addCurrencyName(name));
     dispatch(addCurrencySymbol(symbol));
     dispatch(addCurrencyPriceUsd(priceUsd));
@@ -50,36 +53,12 @@ const TableRow: FC<IAssets> = ({
         </Link>
         <SecondaryButton description='Add' onClick={handleCurrency} />
       </td>
-      <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(+priceUsd)}`}</td>
-      <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        notation: 'compact',
-        compactDisplay: 'short',
-        maximumFractionDigits: 2,
-      }).format(+marketCapUsd)}`}</td>
-      <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(+vwap24Hr)}`}</td>
-      <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        notation: 'compact',
-        compactDisplay: 'short',
-        maximumFractionDigits: 2,
-      }).format(+supply)}`}</td>
-      <td colSpan={1}>{`${new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        notation: 'compact',
-        compactDisplay: 'short',
-        maximumFractionDigits: 2,
-      }).format(+volumeUsd24Hr)}`}</td>
-      <td colSpan={1}>{`${Number(changePercent24Hr).toFixed(2)}%`}</td>
+      <td colSpan={1}>{convertToThousands(priceUsd)}</td>
+      <td colSpan={1}>{convertToMillions(marketCapUsd)}</td>
+      <td colSpan={1}>{convertToThousands(vwap24Hr)}</td>
+      <td colSpan={1}>{convertToMillions(supply)}</td>
+      <td colSpan={1}>{convertToMillions(volumeUsd24Hr)}</td>
+      <td colSpan={1}>{`${convertToPercentage(changePercent24Hr)}%`}</td>
     </tr>
   );
 };

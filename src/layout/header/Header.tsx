@@ -5,6 +5,7 @@ import { PATHS } from '../../constants/paths';
 import { ModalCart, Cart } from '../../components';
 import { FC } from 'react';
 import { useGetAssetsQuery } from '../../API/coincap';
+import { convertToThousands } from '../../utils/convertToThousands';
 import { Icon } from '@iconify/react';
 import './Header.scss';
 
@@ -26,21 +27,22 @@ const Header: FC = () => {
             assets &&
             assets.data.map(({ id, name, symbol, priceUsd }) => {
               return (
-                <div key={id} className='header-currency__wrapper'>
+                <Link
+                  to={`/${id}`}
+                  key={id}
+                  className='header-currency__wrapper'
+                >
                   <img
                     className='header-currency__icon'
                     src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
                     alt={symbol}
                   />
-                  <Link to={`/${id}`} className='header-currency__name'>
+                  <div className='header-currency__name'>
                     <div>{`${name}`}</div>
                     <div>{`${symbol}`}</div>
-                  </Link>
-                  <div>{`${new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                  }).format(+priceUsd)}`}</div>
-                </div>
+                  </div>
+                  <div>{convertToThousands(priceUsd)}</div>
+                </Link>
               );
             })}
         </div>

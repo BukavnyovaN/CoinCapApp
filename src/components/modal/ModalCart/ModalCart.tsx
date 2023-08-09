@@ -2,7 +2,9 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { SecondaryButton } from '../../buttons';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { removeCurrencyInfoFromCart } from '../../../store/cartSlice';
 import { close } from '../../../store/modalCartSlice';
+import { Icon } from '@iconify/react';
 import './ModalCart.scss';
 
 const ModalCart: FC = () => {
@@ -12,6 +14,10 @@ const ModalCart: FC = () => {
 
   const closeModal = () => {
     dispatch(close());
+  };
+
+  const deleteCurrency = (value: string) => {
+    dispatch(removeCurrencyInfoFromCart(value));
   };
 
   return (
@@ -44,7 +50,13 @@ const ModalCart: FC = () => {
                   </div>
                 </Link>
                 <div>{`Amount: ${amount}`}</div>
-                <div>{`Price: ${Math.floor(+priceUsd!) * amount!}`}</div>
+                <div>{`Price: $${Math.floor(+priceUsd!) * amount!}`}</div>
+                <button
+                  className='button-delete'
+                  onClick={() => deleteCurrency(id!)}
+                >
+                  <Icon icon='cil:trash' color='white' width='18' height='18' />
+                </button>
               </div>
             );
           })}
