@@ -12,21 +12,20 @@
   flex-direction: column;
   gap: $base * 5;
   border-radius: $base;
-  width: 30%;
-  height: 20%;
+  width: fit-content;
+  height: fit-content;
   padding: $base * 8 $base * 3 $base * 3 $base * 3;
   background-color: $color-white;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
     rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
   color: $color-dark;
-  overflow-y: auto;
 
   @media (max-width: $breakpoint-sm-min) {
-    width: 75%;
+    width: fit-content;
   }
 
   @media (max-width: $breakpoint-xs-min) {
-    width: 90%;
+    width: fit-content;
   }
 
   .button-secondary {
@@ -38,7 +37,6 @@
 
 .input-number {
   display: block;
-  width: 95%;
   height: 35%;
   margin: 0 auto;
   border-radius: $base * 2;

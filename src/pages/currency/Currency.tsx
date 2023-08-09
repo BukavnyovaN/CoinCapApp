@@ -8,6 +8,10 @@ import {
   addCurrencySymbol,
   addCurrencyPriceUsd,
 } from '../../store/currencyInfoSlice';
+import { convertToMillions } from '../../utils/convertToMillions';
+import { convertToPercentage } from '../../utils/convertToPercentage';
+import { convertToThousands } from '../../utils/convertToThousands';
+import { convertToDate } from '../../utils/convertToDate';
 import { useGetAssetQuery, useGetAssetHistoryQuery } from '../../API/coincap';
 import { Chart, SecondaryButton, ModalWindow } from '../../components';
 import './Currency.scss';
@@ -19,23 +23,16 @@ const Currency: FC = () => {
 
   const { data: assetHistory } = useGetAssetHistoryQuery({ id: currencyId });
 
-  const labelsChart = assetHistory?.data.map(({ time }) =>
-    new Date(time).toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    })
-  );
-
+  const labelsChart = assetHistory?.data.map(({ time }) => convertToDate(time));
   const dataChart = assetHistory?.data.map(({ priceUsd }) =>
-    Number(priceUsd).toFixed(2)
+    convertToPercentage(priceUsd)
   );
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(asset!.data.id!));
-    dispatch(addCurrencyName(asset!.data.name));
-    dispatch(addCurrencySymbol(asset!.data.symbol));
-    dispatch(addCurrencyPriceUsd(asset!.data.priceUsd));
+    dispatch(addCurrencyId(asset ? asset.data.id! : ''));
+    dispatch(addCurrencyName(asset ? asset.data.name : ''));
+    dispatch(addCurrencySymbol(asset ? asset.data.symbol : ''));
+    dispatch(addCurrencyPriceUsd(asset ? asset.data.priceUsd : ''));
     dispatch(open());
   };
 
@@ -46,44 +43,29 @@ const Currency: FC = () => {
         <>
           <div className='currency-details_wrapper'>
             <div className='circle'>
-              <h3>Rank</h3>
-              <h3>{asset.data.rank}</h3>
+              <h4>Rank</h4>
+              <h5>{asset.data.rank}</h5>
             </div>
             <div className='circle'>
-              <h3>Market Cap</h3>
-              <h3>
-                {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  notation: 'compact',
-                  compactDisplay: 'short',
-                  maximumFractionDigits: 2,
-                }).format(+asset.data.marketCapUsd)}
-              </h3>
+              <h4>{`${asset.data.name} (${asset.data.symbol})`}</h4>
+              <h5>
+                {convertToThousands(asset.data.priceUsd)} (
+                {convertToPercentage(asset.data.changePercent24Hr)})
+              </h5>
             </div>
             <div className='circle'>
-              <h3>Supply</h3>
-              <h3>
-                {`${new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  notation: 'compact',
-                  compactDisplay: 'short',
-                  maximumFractionDigits: 2,
-                }).format(+asset.data.supply)} ${asset.data.symbol}`}
-              </h3>
+              <h4>Market Cap</h4>
+              <h5>{convertToMillions(asset.data.marketCapUsd)}</h5>
             </div>
             <div className='circle'>
-              <h3>Volume (24Hr)</h3>
-              <h3>
-                {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  notation: 'compact',
-                  compactDisplay: 'short',
-                  maximumFractionDigits: 2,
-                }).format(+asset.data.volumeUsd24Hr)}
-              </h3>
+              <h4>Supply</h4>
+              <h5>{`${convertToMillions(asset.data.supply)} ${
+                asset.data.symbol
+              }`}</h5>
+            </div>
+            <div className='circle'>
+              <h4>Volume (24Hr)</h4>
+              <h5>{convertToMillions(asset.data.volumeUsd24Hr)}</h5>
             </div>
             <SecondaryButton description='+' onClick={handleCurrency} />
             <ModalWindow />
