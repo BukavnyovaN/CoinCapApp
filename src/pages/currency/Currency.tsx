@@ -50,7 +50,7 @@ const Currency: FC = () => {
               <h4>{`${asset.data.name} (${asset.data.symbol})`}</h4>
               <h5>
                 {convertToThousands(asset.data.priceUsd)} (
-                {convertToPercentage(asset.data.changePercent24Hr)})
+                {`${convertToPercentage(asset.data.changePercent24Hr)}%`})
               </h5>
             </div>
             <div className='circle'>

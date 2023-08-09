@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { IAssets } from '../API/coincap';
 
 export interface ICart {
   id: string;
@@ -44,6 +45,19 @@ export const cartSlice = createSlice({
     handleTotalCart: (state, action: PayloadAction<number>) => {
       state.total = action.payload;
     },
+    updateCart: (state, action: PayloadAction<IAssets[] | undefined>) => {
+      const tempState = [...state.cartList];
+
+      if (tempState.length && action.payload?.length) {
+        for (let i = 0; i < tempState.length; i += 1) {
+          tempState[i].priceUsd = action.payload[i].priceUsd
+            ? action.payload[i].priceUsd
+            : tempState[i].priceUsd;
+        }
+
+        state.cartList = tempState;
+      }
+    },
   },
 });
 
@@ -51,5 +65,6 @@ export const {
   addCurrencyInfoToCart,
   removeCurrencyInfoFromCart,
   handleTotalCart,
+  updateCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

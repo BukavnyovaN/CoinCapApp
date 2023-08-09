@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { close } from '../../../store/modalWindowSlice';
 import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
 import { addCurrencyInfoToCart } from '../../../store/cartSlice';
+import { Icon } from '@iconify/react';
 import './ModalWindow.scss';
 
 const ModalWindow: FC = () => {
@@ -13,7 +14,7 @@ const ModalWindow: FC = () => {
   );
   const dispatch = useAppDispatch();
 
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number>(1);
 
   const closeModal = () => {
     dispatch(close());
@@ -54,8 +55,15 @@ const ModalWindow: FC = () => {
             onClick={handleSubmit}
           />
           <Button
-            className='button-secondary'
-            description='x'
+            className='button-delete'
+            description={
+              <Icon
+                icon='ic:round-close'
+                color='white'
+                width='14'
+                height='14'
+              />
+            }
             onClick={closeModal}
           />
         </div>
