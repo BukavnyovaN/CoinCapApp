@@ -3,7 +3,7 @@ import './Button.scss';
 
 interface IButton {
   className: string;
-  description: string;
+  description: string | any;
   onClick?: () => void;
 }
 

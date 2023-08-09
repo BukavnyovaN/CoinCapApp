@@ -64,10 +64,14 @@ const ModalCart: FC = () => {
               </div>
             );
           })}
-        <h2>{`Total: ${convertToThousands(currentCartTotal.toString())}`}</h2>
+        <div className='modal-window_total'>{`Total: ${convertToThousands(
+          currentCartTotal.toString()
+        )}`}</div>
         <Button
-          className='button-secondary'
-          description='x'
+          className='button-delete'
+          description={
+            <Icon icon='ic:round-close' color='white' width='14' height='14' />
+          }
           onClick={closeModal}
         />
       </div>

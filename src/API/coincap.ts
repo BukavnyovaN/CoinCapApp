@@ -52,7 +52,7 @@ export interface IGetAssetHisoryRequest {
 }
 
 export const coinCapApi = createApi({
-  reducerPath: 'coinCapApi',
+  reducerPath: 'coinCapApp',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coincap.io/v2/' }),
   endpoints: (builder) => ({
     getAssets: builder.query<IGetAssetsResponse, IGetAssetsRequest>({
