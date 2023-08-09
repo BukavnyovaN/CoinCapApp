@@ -8,8 +8,8 @@
   z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: flex-start;
+  flex-direction: column !important;
   gap: $base * 5;
   border-radius: $base;
   width: fit-content;
@@ -27,12 +27,13 @@
   @media (max-width: $breakpoint-xs-min) {
     width: fit-content;
   }
+}
 
-  .button-secondary {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+.modal-window_button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $base * 3;
 }
 
 .input-number {

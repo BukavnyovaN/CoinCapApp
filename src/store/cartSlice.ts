@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { getLocalStorage } from '../utils/getLocalStorage';
 
 export interface ICart {
   id: string;
@@ -10,30 +9,47 @@ export interface ICart {
   amount: number;
 }
 
-const initialState: ICart[] = getLocalStorage('modalCartInfo')
-  ? getLocalStorage('modalCartInfo')
-  : [];
+export interface IInitialState {
+  cartList: ICart[];
+  total: number;
+}
+
+const currentCartList = localStorage.getItem('currentCartList') || null;
+const currentCartTotal = localStorage.getItem('currentCartTotal') || null;
+
+const initialState: IInitialState = {
+  cartList: currentCartList ? JSON.parse(currentCartList) : [],
+  total: currentCartTotal ? JSON.parse(currentCartTotal) : 0,
+};
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addCurrencyInfoToCart: (state, action: PayloadAction<ICart>) => {
-      const isCurrencyExist = state.find(({ id }) => id === action.payload.id);
+      const isCurrencyExist = state.cartList.find(
+        ({ id }) => id === action.payload.id
+      );
 
       if (isCurrencyExist) {
         isCurrencyExist.amount += action.payload.amount;
         return state;
+      } else {
+        state.cartList.push(action.payload);
       }
-
-      state.push(action.payload);
     },
     removeCurrencyInfoFromCart: (state, action: PayloadAction<string>) => {
-      return state.filter(({ id }) => id !== action.payload);
+      state.cartList = state.cartList.filter(({ id }) => id !== action.payload);
+    },
+    handleTotalCart: (state, action: PayloadAction<number>) => {
+      state.total = action.payload;
     },
   },
 });
 
-export const { addCurrencyInfoToCart, removeCurrencyInfoFromCart } =
-  cartSlice.actions;
+export const {
+  addCurrencyInfoToCart,
+  removeCurrencyInfoFromCart,
+  handleTotalCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;

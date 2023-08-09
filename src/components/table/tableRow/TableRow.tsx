@@ -7,7 +7,7 @@ import {
   addCurrencySymbol,
   addCurrencyPriceUsd,
 } from '../../../store/currencyInfoSlice';
-import { SecondaryButton } from '../../buttons';
+import { Button } from '../../button/Button';
 import { convertToMillions } from '../../../utils/convertToMillions';
 import { convertToPercentage } from '../../../utils/convertToPercentage';
 import { convertToThousands } from '../../../utils/convertToThousands';
@@ -51,7 +51,11 @@ const TableRow: FC<IAssets> = ({
             <div>{`${symbol}`}</div>
           </div>
         </Link>
-        <SecondaryButton description='Add' onClick={handleCurrency} />
+        <Button
+          className='button-secondary'
+          description='Add'
+          onClick={handleCurrency}
+        />
       </td>
       <td colSpan={1}>{convertToThousands(priceUsd)}</td>
       <td colSpan={1}>{convertToMillions(marketCapUsd)}</td>

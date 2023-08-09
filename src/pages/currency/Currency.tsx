@@ -13,7 +13,7 @@ import { convertToPercentage } from '../../utils/convertToPercentage';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { convertToDate } from '../../utils/convertToDate';
 import { useGetAssetQuery, useGetAssetHistoryQuery } from '../../API/coincap';
-import { Chart, SecondaryButton, ModalWindow } from '../../components';
+import { Chart, Button, ModalWindow } from '../../components';
 import './Currency.scss';
 
 const Currency: FC = () => {
@@ -67,7 +67,11 @@ const Currency: FC = () => {
               <h4>Volume (24Hr)</h4>
               <h5>{convertToMillions(asset.data.volumeUsd24Hr)}</h5>
             </div>
-            <SecondaryButton description='+' onClick={handleCurrency} />
+            <Button
+              className='button-secondary'
+              description='+'
+              onClick={handleCurrency}
+            />
             <ModalWindow />
           </div>
           <Chart
