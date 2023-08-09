@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, useState } from 'react';
-import { SecondaryButton, PrimaryButton } from '../../buttons/index';
+import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { close } from '../../../store/modalWindowSlice';
 import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
@@ -47,8 +47,18 @@ const ModalWindow: FC = () => {
           value={amount}
           onChange={handleInputNumber}
         />
-        <PrimaryButton description='Submit' onClick={handleSubmit} />
-        <SecondaryButton description='close' onClick={closeModal} />
+        <div className='modal-window_button-wrapper'>
+          <Button
+            className='button-primary'
+            description='Submit'
+            onClick={handleSubmit}
+          />
+          <Button
+            className='button-secondary'
+            description='x'
+            onClick={closeModal}
+          />
+        </div>
       </div>
       <div
         className={`shadow ${!isModalAddOpen ? 'display_none' : ''}`}

@@ -2,12 +2,7 @@ import React from 'react';
 import { FC, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useGetAssetsQuery } from '../../API/coincap';
-import {
-  TableHead,
-  TableRow,
-  PrimaryButton,
-  ModalWindow,
-} from '../../components';
+import { TableHead, TableRow, Button, ModalWindow } from '../../components';
 import './Main.scss';
 
 const Main: FC = () => {
@@ -23,7 +18,7 @@ const Main: FC = () => {
   };
 
   return (
-    <div>
+    <div className='main-wrapper'>
       <table className='table'>
         <TableHead />
         <tbody>
@@ -66,7 +61,11 @@ const Main: FC = () => {
             )}
         </tbody>
       </table>
-      <PrimaryButton description='Load More' onClick={increaseLimit} />
+      <Button
+        className='button-primary'
+        description='Load More'
+        onClick={increaseLimit}
+      />
       <ModalWindow />
     </div>
   );

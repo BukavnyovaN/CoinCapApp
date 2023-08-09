@@ -1,15 +1,17 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { SecondaryButton } from '../../buttons';
+import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { removeCurrencyInfoFromCart } from '../../../store/cartSlice';
+import { convertToThousands } from '../../../utils/convertToThousands';
 import { close } from '../../../store/modalCartSlice';
 import { Icon } from '@iconify/react';
 import './ModalCart.scss';
 
 const ModalCart: FC = () => {
   const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);
-  const modalCartInfo = useAppSelector(({ cart }) => cart);
+  const currentCartList = useAppSelector(({ cart }) => cart.cartList);
+  const currentCartTotal = useAppSelector(({ cart }) => cart.total);
   const dispatch = useAppDispatch();
 
   const closeModal = () => {
@@ -27,11 +29,11 @@ const ModalCart: FC = () => {
           !isModalCartOpen ? 'display_none' : ''
         }`}
       >
-        {!modalCartInfo.length && (
+        {!currentCartList.length && (
           <h2>Your portfolio is empty... Add more currency!</h2>
         )}
-        {modalCartInfo &&
-          modalCartInfo.map(({ id, name, symbol, priceUsd, amount }) => {
+        {currentCartList &&
+          currentCartList.map(({ id, name, symbol, priceUsd, amount }) => {
             return (
               <div key={id} className='flex_space-between'>
                 <Link
@@ -40,7 +42,7 @@ const ModalCart: FC = () => {
                   onClick={closeModal}
                 >
                   <img
-                    src={`https://assets.coincap.io/assets/icons/${symbol!.toLowerCase()}@2x.png`}
+                    src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
                     alt={symbol}
                     className='header-currency__icon'
                   />
@@ -50,18 +52,24 @@ const ModalCart: FC = () => {
                   </div>
                 </Link>
                 <div>{`Amount: ${amount}`}</div>
-                <div>{`Price: $${Math.floor(+priceUsd!) * amount!}`}</div>
+                <div>{`Price: ${convertToThousands(
+                  (+priceUsd * amount).toString()
+                )}`}</div>
                 <button
                   className='button-delete'
-                  onClick={() => deleteCurrency(id!)}
+                  onClick={() => deleteCurrency(id)}
                 >
                   <Icon icon='cil:trash' color='white' width='18' height='18' />
                 </button>
               </div>
             );
           })}
-        <h2>Total: </h2>
-        <SecondaryButton description='x' onClick={closeModal} />
+        <h2>{`Total: ${convertToThousands(currentCartTotal.toString())}`}</h2>
+        <Button
+          className='button-secondary'
+          description='x'
+          onClick={closeModal}
+        />
       </div>
       <div
         className={`shadow ${!isModalCartOpen ? 'display_none' : ''}`}
