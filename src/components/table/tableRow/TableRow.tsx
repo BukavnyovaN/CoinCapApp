@@ -14,6 +14,7 @@ import { convertToThousands } from '../../../utils/convertToThousands';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { open } from '../../../store/modalWindowSlice';
 import './TableRow.scss';
+import React from 'react';
 
 const TableRow: FC<IAssets> = ({
   id,
@@ -40,7 +41,10 @@ const TableRow: FC<IAssets> = ({
     <tr>
       <td colSpan={1}>{rank}</td>
       <td colSpan={2} className='table-currency__wrapper'>
-        <Link to={`/currency/${id}`} className='table-currency__name-wrapper'>
+        <Link
+          to={`/CoinCapApp/currency/${id}`}
+          className='table-currency__name-wrapper'
+        >
           <img
             src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
             alt={symbol}
