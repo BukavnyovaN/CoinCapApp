@@ -14,7 +14,7 @@ const ModalWindow: FC = () => {
   );
   const dispatch = useAppDispatch();
 
-  const [amount, setAmount] = useState<any>('');
+  const [amount, setAmount] = useState<number>(1);
 
   const closeModal = () => {
     dispatch(close());
@@ -26,9 +26,7 @@ const ModalWindow: FC = () => {
     if (value > 0 && value < 1000) {
       dispatch(addCurrencyAmount(amount));
       setAmount(value);
-      return;
     }
-    setAmount(Math.floor(value / 10));
   };
 
   const handleSubmit = () => {
