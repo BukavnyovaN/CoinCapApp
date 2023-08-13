@@ -1,11 +1,13 @@
 export interface IPATHS {
-  main: string;
-  currency: string;
-  any: string;
+  MAIN: string;
+  CURRENCY: string;
+  ANY: string;
+  NOT_FOUND: string;
 }
 
 export const PATHS: IPATHS = {
-  main: '/',
-  currency: '/:currencyId',
-  any: '*',
+  MAIN: '/',
+  CURRENCY: '/currency/:currencyId',
+  ANY: '*',
+  NOT_FOUND: '/not-found',
 };

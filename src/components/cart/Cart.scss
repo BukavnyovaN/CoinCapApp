@@ -42,4 +42,7 @@
 .cart-wrapper_info-details {
   display: flex;
   gap: $base;
+  @media (max-width: $breakpoint-xs-min) {
+    display: none;
+  }
 }

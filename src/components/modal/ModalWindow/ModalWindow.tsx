@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { close } from '../../../store/modalWindowSlice';
@@ -14,21 +14,28 @@ const ModalWindow: FC = () => {
   );
   const dispatch = useAppDispatch();
 
-  const [amount, setAmount] = useState<number>(1);
+  const [amount, setAmount] = useState<any>('');
 
   const closeModal = () => {
     dispatch(close());
   };
 
-  const handleInputNumber = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputNumber = (event: any) => {
     const target = event.target as HTMLInputElement;
     const value = +target.value as number;
-    setAmount(value);
-    dispatch(addCurrencyAmount(amount));
+    if (value > 0 && value < 1000) {
+      dispatch(addCurrencyAmount(amount));
+      setAmount(value);
+      return;
+    }
+    setAmount(Math.floor(value / 10));
   };
 
   const handleSubmit = () => {
-    dispatch(addCurrencyInfoToCart({ id, name, symbol, priceUsd, amount }));
+    const datetime = new Date().getTime();
+    dispatch(
+      addCurrencyInfoToCart({ id, name, symbol, priceUsd, amount, datetime })
+    );
     closeModal();
   };
 
@@ -39,9 +46,11 @@ const ModalWindow: FC = () => {
           !isModalAddOpen ? 'display_none' : ''
         }`}
       >
+        Enter the amount of currency in the range from 1 to 999
         <input
           type='number'
-          placeholder='0'
+          min='0'
+          max='999'
           name=''
           id=''
           className='input-number'

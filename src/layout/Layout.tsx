@@ -5,12 +5,12 @@ import React from 'react';
 
 const Layout: FC = () => {
   return (
-    <>
+    <div>
       <Header />
       <main className='wrapper'>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 
