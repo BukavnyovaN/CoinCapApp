@@ -11,6 +11,10 @@
   border-collapse: collapse;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
     rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+
+  @media (max-width: $breakpoint-sm-min) {
+    margin: 0;
+  }
 }
 
 .tr {
@@ -18,6 +22,14 @@
 }
 
 th {
+  @media (max-width: $breakpoint-sm-min) {
+    font-size: x-small;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: 12px;
+  }
+
   &:first-child {
     text-align: center;
   }
@@ -35,6 +47,12 @@ th {
   &:nth-child(5),
   &:nth-child(7) {
     @media (max-width: $breakpoint-sm-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(8) {
+    @media (max-width: $breakpoint-xxs-min) {
       display: none;
     }
   }
@@ -56,6 +74,16 @@ td {
     @media (max-width: $breakpoint-sm-min) {
       display: none;
     }
+  }
+
+  &:nth-child(8) {
+    @media (max-width: $breakpoint-xxs-min) {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: 12px;
   }
 }
 

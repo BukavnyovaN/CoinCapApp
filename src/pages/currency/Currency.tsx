@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { useParams } from 'react-router-dom';
+import { PATHS } from '../../constants/paths';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hooks';
 import { open } from '../../store/modalWindowSlice';
 import {
@@ -17,9 +18,19 @@ import { Chart, Button, ModalWindow } from '../../components';
 import './Currency.scss';
 
 const Currency: FC = () => {
+  const { NOT_FOUND } = PATHS;
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { currencyId } = useParams();
-  const { data: asset, isLoading } = useGetAssetQuery({ id: currencyId });
+  const {
+    data: asset,
+    isLoading,
+    error,
+  } = useGetAssetQuery({ id: currencyId });
+
+  if (error) {
+    navigate(NOT_FOUND);
+  }
 
   const { data: assetHistory } = useGetAssetHistoryQuery({ id: currencyId });
 

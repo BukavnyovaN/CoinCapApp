@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/hooks';
-import { open } from '../../store/modalCartSlice';
 import { PATHS } from '../../constants/paths';
 import { ModalCart, Cart } from '../../components';
 import { FC } from 'react';
@@ -10,13 +8,8 @@ import { Icon } from '@iconify/react';
 import './Header.scss';
 
 const Header: FC = () => {
-  const { main } = PATHS;
-  const dispatch = useAppDispatch();
+  const { MAIN } = PATHS;
   const { data: assets, isLoading } = useGetAssetsQuery({ limit: 3 });
-
-  const openModalCart = () => {
-    dispatch(open());
-  };
 
   return (
     <>
@@ -28,7 +21,7 @@ const Header: FC = () => {
             assets.data.map(({ id, name, symbol, priceUsd }) => {
               return (
                 <Link
-                  to={`/${id}`}
+                  to={`/currency/${id}`}
                   key={id}
                   className='header-currency__wrapper'
                 >
@@ -46,7 +39,7 @@ const Header: FC = () => {
               );
             })}
         </div>
-        <Link to={main} className='logo-wrapper'>
+        <Link to={MAIN} className='logo-wrapper'>
           <Icon
             icon='game-icons:abstract-006'
             color='#ffffff'
