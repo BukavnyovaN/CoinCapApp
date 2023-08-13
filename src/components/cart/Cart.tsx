@@ -30,16 +30,6 @@ const Cart: FC = () => {
   console.log(ids);
   const { data: assets } = useGetAssetsQuery({ ids });
 
-  const calculatePercentage = (prev: number, next: number) => {
-    if (!prev && !next) {
-      setPercentage(0);
-    } else if (!next) {
-      setPercentage(0);
-    } else {
-      setPercentage((prev / next - 1) * 100);
-    }
-  };
-
   useEffect(() => {
     if (assets?.data) {
       dispatch(updateCart(assets?.data));
@@ -53,8 +43,8 @@ const Cart: FC = () => {
           actualTotalPrice += +actualCurrency.priceUsd * boughtCurrency.amount;
         });
 
-        setDifference(totalSum - actualTotalPrice);
-        calculatePercentage(totalSum, actualTotalPrice);
+        setDifference(actualTotalPrice - totalSum);
+        setPercentage((actualTotalPrice / totalSum - 1) * 100);
       }
     }
   }, [assets?.data]);
