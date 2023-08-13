@@ -4,6 +4,7 @@ import { Main, Currency, NotFound } from './pages';
 import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
 import { useOverflow } from './hooks/useOverflow';
+import React from 'react';
 
 const App: FC = () => {
   const { MAIN, ANY, CURRENCY, NOT_FOUND } = PATHS;

@@ -6,6 +6,7 @@ import { useGetAssetsQuery } from '../../API/coincap';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { Icon } from '@iconify/react';
 import './Header.scss';
+import React from 'react';
 
 const Header: FC = () => {
   const { MAIN } = PATHS;
@@ -21,7 +22,7 @@ const Header: FC = () => {
             assets.data.map(({ id, name, symbol, priceUsd }) => {
               return (
                 <Link
-                  to={`/currency/${id}`}
+                  to={`/CoinCapApp/currency/${id}`}
                   key={id}
                   className='header-currency__wrapper'
                 >

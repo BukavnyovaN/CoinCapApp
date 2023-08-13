@@ -6,8 +6,8 @@ export interface IPATHS {
 }
 
 export const PATHS: IPATHS = {
-  MAIN: '/',
-  CURRENCY: '/currency/:currencyId',
+  MAIN: '/CoinCapApp',
+  CURRENCY: '/CoinCapApp/currency/:currencyId',
   ANY: '*',
-  NOT_FOUND: '/not-found',
+  NOT_FOUND: '/CoinCapApp/not-found',
 };
