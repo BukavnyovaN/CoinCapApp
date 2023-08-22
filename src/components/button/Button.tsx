@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+
 import './Button.scss';
 
 interface IButton {
-  className: string;
+  className: 'button-primary' | 'button-secondary' | 'button-delete';
   description: string | any;
   onClick?: () => void;
 }

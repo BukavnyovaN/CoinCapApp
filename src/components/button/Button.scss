@@ -1,6 +1,7 @@
 @import '../../sass/constants.scss';
 
 .button-primary {
+  color: $color-white;
   display: block;
   margin: $base * 2 auto;
   font-size: $fs-xxl;
@@ -20,6 +21,8 @@
 }
 
 .button-secondary {
+  display: block;
+  margin: $base * 2 auto;
   color: $color-black;
   background-color: $color-white;
   border-radius: $base * 4;
@@ -30,6 +33,7 @@
   cursor: pointer;
 
   &:hover {
+    background-color: $color-primary;
     color: $color-white;
     transform: translate(0.04rem, 0.04rem);
   }
@@ -42,9 +46,8 @@
 }
 
 .button-delete {
-  line-height: 14px;
-  padding: 0 12px;
-  margin: 0;
+  display: block;
+  margin: $base * 2 auto;
   background-color: $color-primary;
   border-radius: $base * 4;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
