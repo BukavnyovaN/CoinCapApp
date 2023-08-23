@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+
 import { IAssets } from '../../../API/coincap';
 import {
   addCurrencyId,
@@ -13,6 +14,7 @@ import { convertToPercentage } from '../../../utils/convertToPercentage';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { open } from '../../../store/modalWindowSlice';
+
 import './TableRow.scss';
 import React from 'react';
 
