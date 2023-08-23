@@ -17,6 +17,8 @@ const Main: FC = () => {
     setLimit(limit + 20);
   };
 
+  console.log(assets);
+
   return (
     <div className='main-wrapper'>
       <table className='table'>

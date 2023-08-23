@@ -1,5 +1,12 @@
 @import '../../../sass/constants.scss';
 
+tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $base;
+  margin: $base;
+}
 .table-currency__wrapper {
   display: flex;
   align-items: center;
