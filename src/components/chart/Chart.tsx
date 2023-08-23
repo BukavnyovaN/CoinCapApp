@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,8 +9,8 @@ import {
   Tooltip,
   Filler,
   Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -27,11 +27,11 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "top" as const,
+      position: 'top' as const,
     },
     title: {
       display: false,
-      text: "Chart.js Line Chart",
+      text: 'Chart.js Line Chart',
     },
   },
 };
@@ -43,6 +43,7 @@ export interface IChart {
 }
 
 const Chart: FC<IChart> = ({ labelsChart, dataChart, name }) => {
+  console.log('label', labelsChart);
   const data = {
     labels: labelsChart,
     datasets: [
@@ -50,8 +51,8 @@ const Chart: FC<IChart> = ({ labelsChart, dataChart, name }) => {
         fill: true,
         label: name,
         data: dataChart,
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
   };
