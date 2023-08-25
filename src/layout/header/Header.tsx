@@ -19,7 +19,7 @@ const Header: FC = () => {
           {isLoading && <div>Loading...</div>}
           {!isLoading &&
             assets &&
-            assets.data.map(({ id, name, symbol, priceUsd }) => {
+            assets?.result?.data.map(({ id, name, symbol, priceUsd }) => {
               return (
                 <Link
                   to={`/CoinCapApp/currency/${id}`}
