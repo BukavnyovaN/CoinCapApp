@@ -15,8 +15,7 @@ export interface IAssets {
 }
 
 export interface IGetAssetsResponse {
-  data: IAssets[];
-  timestamp: number;
+  result: { data: IAssets[]};
 }
 
 export interface IGetAssetsRequest {
@@ -53,11 +52,12 @@ export interface IGetAssetHisoryRequest {
 
 export const coinCapApi = createApi({
   reducerPath: 'coinCapApp',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coincap.io/v2/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://coin-cap-server.onrender.com' }),
   endpoints: (builder) => ({
     getAssets: builder.query<IGetAssetsResponse, IGetAssetsRequest>({
       query: ({ search = '', ids = '', limit = 20, offset = 0 }) =>
-        `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`,
+      `/trpc/assets?input={${limit && `"limit": ${limit}`}${ids && `, "ids":${ids}`}}`,
+        // `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`,
     }),
     getAsset: builder.query<IGetAssetResponse, IGetAssetRequest>({
       query: ({ id = '' }) => `assets/${id && `${id}`}`,
@@ -67,7 +67,7 @@ export const coinCapApi = createApi({
       IGetAssetHisoryRequest
     >({
       query: ({ id = '', interval = 'd1' }) =>
-        `assets/${id && `${id}`}/history?${interval && `interval=${interval}`}`,
+        `assets/${id && `${id}`}/history${interval && `?interval=${interval}`}`,
     }),
   }),
 });

@@ -31,7 +31,7 @@ const Main: FC = () => {
           )}
           {!isLoading &&
             assets &&
-            assets.data.map(
+            assets?.result?.data.map(
               ({
                 id,
                 rank,

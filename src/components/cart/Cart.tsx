@@ -41,13 +41,13 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    if (assets?.data) {
-      dispatch(updateCart(assets?.data));
+    if (assets?.result?.data) {
+      dispatch(updateCart(assets?.result?.data));
 
       if (currentCartList.length) {
         const groupedBoughtCurrenciesDict = currenciesToDict(currentCartList);
         let actualTotalPrice = 0;
-        assets?.data.forEach((actualCurrency) => {
+        assets?.result?.data.forEach((actualCurrency) => {
           const boughtCurrency: ICart =
             groupedBoughtCurrenciesDict[actualCurrency.name];
           actualTotalPrice += +actualCurrency.priceUsd * boughtCurrency.amount;
@@ -57,7 +57,7 @@ const Cart: FC = () => {
         calculatePercentage(totalSum, actualTotalPrice);
       }
     }
-  }, [assets?.data]);
+  }, [assets?.result?.data]);
 
   useEffect(() => {
     localStorage.setItem('currentCartList', JSON.stringify(currentCartList));
