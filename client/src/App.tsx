@@ -5,6 +5,12 @@ import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
 import { useOverflow } from './hooks/useOverflow';
 import React from 'react';
+import { TrpcRouter } from '../../common/trpc-router.type'
+
+import { createTRPCReact } from '@trpc/react-query';
+
+const BACKEND_URL = "http://localhost:8080/cat";
+export const trpc = createTRPCReact<TrpcRouter>();
 
 const App: FC = () => {
   const { MAIN, ANY, CURRENCY, NOT_FOUND } = PATHS;
