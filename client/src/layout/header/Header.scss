@@ -1,0 +1,102 @@
+@import '../../sass/constants.scss';
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: $base * 3;
+  justify-content: space-between;
+  padding: $base * 2;
+  background-color: #2a5f61;
+}
+
+.header-currencies {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  gap: $base;
+
+  @media (max-width: $breakpoint-lg-min) {
+    width: min-content;
+    flex-wrap: wrap;
+    font-size: small;
+    gap: 0;
+    justify-content: flex-start;
+  }
+}
+
+.header-currency__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $color-white;
+  gap: $base;
+  padding: $base;
+  @media (max-width: $breakpoint-xxs-min) {
+    display: none;
+  }
+}
+
+.header-currency__name-wrapper {
+  display: flex;
+  align-items: right;
+  gap: $base;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header-currency__name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: right;
+  gap: $base;
+  color: $color-white;
+  text-align: center;
+  transition: all $transition;
+
+  &:hover {
+    div {
+      text-decoration: underline;
+    }
+  }
+}
+
+.header-currency__icon {
+  width: $base * 4;
+  height: $base * 4;
+}
+
+.logo-wrapper {
+  display: flex;
+  min-width: $base * 20;
+  height: $base * 12;
+}
+
+.logo-name {
+  @media (max-width: $breakpoint-xs-min) {
+    display: none;
+  }
+}
+
+.header-currencies_cart {
+  @media (max-width: $breakpoint-xs-min) {
+    width: $base * 12;
+    height: $base * 12;
+  }
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+P {
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
+}

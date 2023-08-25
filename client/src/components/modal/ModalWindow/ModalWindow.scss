@@ -1,0 +1,47 @@
+@import '../../../sass/constants.scss';
+
+.modal_window-wrapper {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column !important;
+  gap: $base * 5;
+  border-radius: $base;
+  width: fit-content;
+  height: fit-content;
+  padding: $base * 8 $base * 3 $base * 3 $base * 3;
+  background-color: $color-white;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  color: $color-dark;
+
+  @media (max-width: $breakpoint-sm-min) {
+    width: fit-content;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    width: fit-content;
+  }
+}
+
+.modal-window_button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $base * 3;
+}
+
+.input-number {
+  display: block;
+  height: 35%;
+  margin: 0 auto;
+  border-radius: $base * 2;
+  font-size: $fs-xl;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}

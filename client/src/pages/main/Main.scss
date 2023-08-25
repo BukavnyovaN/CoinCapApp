@@ -1,0 +1,125 @@
+@import '../../sass/constants.scss';
+
+.main-wrapper {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  margin: $base * 2;
+  text-align: center;
+  border-collapse: collapse;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+
+  @media (max-width: $breakpoint-sm-min) {
+    margin: 0;
+  }
+}
+
+.tr {
+  border-bottom: 1px solid $color-dark;
+}
+
+th {
+  @media (max-width: $breakpoint-sm-min) {
+    font-size: x-small;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: 12px;
+  }
+
+  &:first-child {
+    text-align: center;
+  }
+  &:nth-child(2) {
+    text-align: left;
+  }
+
+  &:nth-child(4),
+  &:nth-child(6) {
+    @media (max-width: $breakpoint-lg-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(5),
+  &:nth-child(7) {
+    @media (max-width: $breakpoint-sm-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(8) {
+    @media (max-width: $breakpoint-xxs-min) {
+      display: none;
+    }
+  }
+}
+
+td {
+  &:first-child {
+    text-align: center;
+  }
+  &:nth-child(4),
+  &:nth-child(6) {
+    @media (max-width: $breakpoint-lg-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(5),
+  &:nth-child(7) {
+    @media (max-width: $breakpoint-sm-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(8) {
+    @media (max-width: $breakpoint-xxs-min) {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: 12px;
+  }
+}
+
+img {
+  max-width: 24px;
+  max-height: auto;
+}
+
+button {
+  background-color: cadetblue;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Monserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover,
+button:focus {
+  background-color: rgb(73, 129, 131);
+}

@@ -1,0 +1,31 @@
+{
+  "name": "coincapserver",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://BukavnyovaN.github.io/CoinCapServer",
+  "main": "test.js",
+  "dependencies": {
+    "@trpc/server": "^10.37.1",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.5.3",
+    "axios": "^1.4.0",
+    "coincapserver": "file:",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "gh-pages": "^6.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "zod": "^3.22.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node index.ts",
+    "prod": "node ./dist/index.js",
+    "build": "npm install && tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.13"
+  }
+}
