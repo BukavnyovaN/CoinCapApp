@@ -29,7 +29,9 @@
     "storybook-addon-react-router-v6": "^2.0.5",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "axios": "^1.4.0",
+    "zod": "^3.22.2"
   },
   "overrides": {
     "typescript": "^5.1.6",
