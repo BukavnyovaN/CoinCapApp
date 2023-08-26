@@ -1,41 +1,42 @@
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { Icon } from '@iconify/react';
+import { trpc } from '../../utils/trpc';
+
 import { PATHS } from '../../constants/paths';
 import { ModalCart, Cart } from '../../components';
-import { FC } from 'react';
-import { useGetAssetsQuery } from '../../API/coincap';
 import { convertToThousands } from '../../utils/convertToThousands';
-import { Icon } from '@iconify/react';
+
 import './Header.scss';
-import React from 'react';
 
 const Header: FC = () => {
   const { MAIN } = PATHS;
-  const { data: assets, isLoading } = useGetAssetsQuery({ limit: 3 });
+  const headerCurrencies = trpc.assets.useQuery({ limit: 3 });
 
   return (
     <>
       <header className='header wrapper'>
         <div className='header-currencies'>
-          {isLoading && <div>Loading...</div>}
-          {!isLoading &&
-            assets &&
-            assets?.result?.data.map(({ id, name, symbol, priceUsd }) => {
+          {headerCurrencies.isLoading && <div>Loading...</div>}
+          {!headerCurrencies.isLoading &&
+            headerCurrencies.data &&
+            headerCurrencies.data.map((currency: any) => {
               return (
                 <Link
-                  to={`/CoinCapApp/currency/${id}`}
-                  key={id}
+                  to={`/CoinCapApp/currency/${currency.id}`}
+                  key={currency.id}
                   className='header-currency__wrapper'
                 >
                   <img
                     className='header-currency__icon'
-                    src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
-                    alt={symbol}
+                    src={`https://assets.coincap.io/assets/icons/${currency.symbol.toLowerCase()}@2x.png`}
+                    alt={currency.currencysymbol}
                   />
                   <div className='header-currency__name'>
-                    <div>{`${name}`}</div>
-                    <div>{`${symbol}`}</div>
+                    <div>{`${currency.name}`}</div>
+                    <div>{`${currency.symbol}`}</div>
                   </div>
-                  <div>{convertToThousands(priceUsd)}</div>
+                  <div>{convertToThousands(currency.priceUsd)}</div>
                 </Link>
               );
             })}

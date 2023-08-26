@@ -3,8 +3,7 @@
 .button-primary {
   color: $color-white;
   display: block;
-  margin: $base * 2 auto;
-  font-size: $fs-xxl;
+ font-size: $fs-xxl;
   font-weight: $fw-medium;
   border-radius: $base * 4;
   background-color: $color-primary;
@@ -22,7 +21,6 @@
 
 .button-secondary {
   display: block;
-  margin: $base * 2 auto;
   color: $color-black;
   background-color: $color-white;
   border-radius: $base * 4;

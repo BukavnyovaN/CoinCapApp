@@ -43,7 +43,6 @@ export interface IChart {
 }
 
 const Chart: FC<IChart> = ({ labelsChart, dataChart, name }) => {
-  console.log('label', labelsChart);
   const data = {
     labels: labelsChart,
     datasets: [

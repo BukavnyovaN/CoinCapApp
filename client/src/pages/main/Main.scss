@@ -119,6 +119,13 @@ button {
   touch-action: manipulation;
 }
 
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $base*4;
+}
+
 button:hover,
 button:focus {
   background-color: rgb(73, 129, 131);

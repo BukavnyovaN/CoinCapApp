@@ -1,73 +1,74 @@
-import React from 'react';
 import { FC, useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { useGetAssetsQuery } from '../../API/coincap';
 import { TableHead, TableRow, Button, ModalWindow } from '../../components';
+import { trpc } from '../../utils/trpc';
+
 import './Main.scss';
 
 const Main: FC = () => {
-  const [limit, setLimit] = useState<number>(20);
+  const [limit, setLimit] = useState<number>(10);
+  const [offset, setOffset] = useState<number>(0);
+  
+  const currencyQuery = trpc.assets.useQuery({ids: '', limit, offset})
 
   const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
   const dispatch = useAppDispatch();
 
-  const { data: assets, isLoading } = useGetAssetsQuery({ limit: limit });
-
-  const increaseLimit = () => {
-    setLimit(limit + 20);
+  const increaseOffset = () => {
+    setOffset(offset + 10);
   };
-
-  console.log(assets);
+  const decreaseOffset = () => {
+    if (offset >= 10) {
+      setOffset(offset - 10);
+    }
+  };
 
   return (
     <div className='main-wrapper'>
       <table className='table'>
         <TableHead />
         <tbody>
-          {isLoading && (
+          {currencyQuery.isLoading && (
             <tr>
               <th colSpan={8}>Loading...</th>
             </tr>
           )}
-          {!isLoading &&
-            assets &&
-            assets?.result?.data.map(
-              ({
-                id,
-                rank,
-                name,
-                symbol,
-                priceUsd,
-                marketCapUsd,
-                vwap24Hr,
-                supply,
-                volumeUsd24Hr,
-                changePercent24Hr,
-              }) => {
+          {!currencyQuery.isLoading &&
+            currencyQuery.data &&
+            currencyQuery.data.map(
+              (currency: any) => {
                 return (
                   <TableRow
-                    key={id}
-                    id={id}
-                    rank={rank}
-                    name={name}
-                    symbol={symbol}
-                    priceUsd={priceUsd}
-                    marketCapUsd={marketCapUsd}
-                    vwap24Hr={vwap24Hr}
-                    supply={supply}
-                    volumeUsd24Hr={volumeUsd24Hr}
-                    changePercent24Hr={changePercent24Hr}
+                    key={currency.id}
+                    id={currency.id}
+                    rank={currency.rank}
+                    name={currency.name}
+                    symbol={currency.symbol}
+                    priceUsd={currency.priceUsd}
+                    marketCapUsd={currency.marketCapUsd}
+                    vwap24Hr={currency.vwap24Hr}
+                    supply={currency.supply}
+                    volumeUsd24Hr={currency.volumeUsd24Hr}
+                    changePercent24Hr={currency.changePercent24Hr}
                   />
                 );
               }
             )}
         </tbody>
       </table>
-      <Button
-        className='button-primary'
-        description='Load More'
-        onClick={increaseLimit}
-      />
+      <div className='button-wrapper'>
+        <Button
+          className='button-primary'
+          description='<<'
+          onClick={decreaseOffset}
+        />
+        <Button
+          className='button-primary'
+          description='>>'
+          onClick={increaseOffset}
+        />
+      </div>
       <ModalWindow />
     </div>
   );

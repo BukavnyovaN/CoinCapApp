@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { useGetAssetsQuery } from '../../API/coincap';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { ICart, handleTotalCart, updateCart } from '../../store/cartSlice';
 import { convertToThousands } from '../../utils/convertToThousands';
@@ -7,6 +6,7 @@ import { open } from '../../store/modalCartSlice';
 import { Icon } from '@iconify/react';
 import './Cart.scss';
 import { currenciesToDict } from '../../utils/groupCurrenciesByName';
+import { trpc } from '../../utils/trpc';
 
 const Cart: FC = () => {
   const dispatch = useAppDispatch();
@@ -27,17 +27,16 @@ const Cart: FC = () => {
   const [percentage, setPercentage] = useState<number>(0);
 
   const ids = currentCartList.map(({ id }) => id).join(',');
-  console.log(ids);
-  const { data: assets } = useGetAssetsQuery({ ids });
+  const currencies = trpc.assets.useQuery({ids});
 
   useEffect(() => {
-    if (assets?.result?.data) {
-      dispatch(updateCart(assets?.result?.data));
+    if (currencies.data) {
+      dispatch(updateCart(currencies.data));
 
       if (currentCartList.length) {
         const groupedBoughtCurrenciesDict = currenciesToDict(currentCartList);
         let actualTotalPrice = 0;
-        assets?.result?.data.forEach((actualCurrency) => {
+        currencies.data.forEach((actualCurrency : any) => {
           const boughtCurrency: ICart =
             groupedBoughtCurrenciesDict[actualCurrency.name];
           actualTotalPrice += +actualCurrency.priceUsd * boughtCurrency.amount;
@@ -47,7 +46,7 @@ const Cart: FC = () => {
         setPercentage((actualTotalPrice / totalSum - 1) * 100);
       }
     }
-  }, [assets?.result?.data]);
+  }, [currencies.data]);
 
   useEffect(() => {
     localStorage.setItem('currentCartList', JSON.stringify(currentCartList));

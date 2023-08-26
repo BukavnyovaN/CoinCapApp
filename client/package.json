@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://BukavnyovaN.github.io/CoinCapApp",
+  "homepage": "https://BukavnyovaN.github.io/CoinCapApp/client/build",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.33.0",

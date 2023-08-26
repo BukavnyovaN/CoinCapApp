@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import { PATHS } from '../../constants/paths';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hooks';
@@ -13,8 +14,9 @@ import { convertToMillions } from '../../utils/convertToMillions';
 import { convertToPercentage } from '../../utils/convertToPercentage';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { convertToDate } from '../../utils/convertToDate';
-import { useGetAssetQuery, useGetAssetHistoryQuery } from '../../API/coincap';
 import { Chart, Button, ModalWindow } from '../../components';
+import { trpc } from '../../utils/trpc';
+
 import './Currency.scss';
 
 const Currency: FC = () => {
@@ -22,61 +24,58 @@ const Currency: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { currencyId } = useParams();
-  const {
-    data: asset,
-    isLoading,
-    error,
-  } = useGetAssetQuery({ id: currencyId });
 
-  if (error) {
-    navigate(NOT_FOUND);
-  }
+  const currencyInfo = trpc.currencyInfo.useQuery({id: currencyId})
 
-  const { data: assetHistory } = useGetAssetHistoryQuery({ id: currencyId });
+  
+  const currencyHistory = trpc.history.useQuery({
+    id: currencyId,
+    interval: 'd1'
+  });
 
-  const labelsChart = assetHistory?.data.map(({ time }) => convertToDate(time));
-  const dataChart = assetHistory?.data.map(({ priceUsd }) =>
-    convertToPercentage(priceUsd)
-  );
+  const labelsChart = currencyHistory.data ? currencyHistory.data?.map((history: { time: number; }) => convertToDate(history.time)) : [];
+  const dataChart = currencyHistory.data ? currencyHistory.data?.map((history: { priceUsd: string }) =>
+    convertToPercentage(history.priceUsd)
+  ) : [];
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(asset ? asset.data.id! : ''));
-    dispatch(addCurrencyName(asset ? asset.data.name : ''));
-    dispatch(addCurrencySymbol(asset ? asset.data.symbol : ''));
-    dispatch(addCurrencyPriceUsd(asset ? asset.data.priceUsd : ''));
+    dispatch(addCurrencyId(currencyInfo ? currencyInfo.data.id! : ''));
+    dispatch(addCurrencyName(currencyInfo ? currencyInfo.data.name : ''));
+    dispatch(addCurrencySymbol(currencyInfo ? currencyInfo.data.symbol : ''));
+    dispatch(addCurrencyPriceUsd(currencyInfo ?currencyInfo.data.priceUsd : ''));
     dispatch(open());
   };
 
   return (
     <div className='currency-wrapper'>
-      {isLoading && <div>Loading...</div>}
-      {!isLoading && asset && (
+      {currencyInfo.isLoading && <div>Loading...</div>}
+      {!currencyInfo.isLoading && currencyInfo.data && (
         <>
           <div className='currency-details_wrapper'>
             <div className='circle'>
               <h4>Rank</h4>
-              <h5>{asset.data.rank}</h5>
+              <h5>{currencyInfo.data.rank}</h5>
             </div>
             <div className='circle'>
-              <h4>{`${asset.data.name} (${asset.data.symbol})`}</h4>
+              <h4>{`${currencyInfo.data.name} (${currencyInfo.data.symbol})`}</h4>
               <h5>
-                {convertToThousands(asset.data.priceUsd)} (
-                {`${convertToPercentage(asset.data.changePercent24Hr)}%`})
+                {convertToThousands(currencyInfo.data.priceUsd)} (
+                {`${convertToPercentage(currencyInfo.data.changePercent24Hr)}%`})
               </h5>
             </div>
             <div className='circle'>
               <h4>Market Cap</h4>
-              <h5>{convertToMillions(asset.data.marketCapUsd)}</h5>
+              <h5>{convertToMillions(currencyInfo.data.marketCapUsd)}</h5>
             </div>
             <div className='circle'>
               <h4>Supply</h4>
-              <h5>{`${convertToMillions(asset.data.supply)} ${
-                asset.data.symbol
+              <h5>{`${convertToMillions(currencyInfo.data.supply)} ${
+                currencyInfo.data.symbol
               }`}</h5>
             </div>
             <div className='circle'>
               <h4>Volume (24Hr)</h4>
-              <h5>{convertToMillions(asset.data.volumeUsd24Hr)}</h5>
+              <h5>{convertToMillions(currencyInfo.data.volumeUsd24Hr)}</h5>
             </div>
             <Button
               className='button-secondary'
@@ -88,7 +87,7 @@ const Currency: FC = () => {
           <Chart
             labelsChart={labelsChart}
             dataChart={dataChart}
-            name={asset.data.name}
+            name={currencyInfo.data.name}
           />
         </>
       )}

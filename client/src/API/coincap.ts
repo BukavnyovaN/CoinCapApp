@@ -57,11 +57,10 @@ export const coinCapApi = createApi({
     getAssets: builder.query<IGetAssetsResponse, IGetAssetsRequest>({
       query: ({ search = '', ids = '', limit = 20, offset = 0 }) =>
       `/trpc/assets?input={${limit && `"limit": ${limit}`}${ids && `, "ids":${ids}`}}`,
-        // `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`,
     }),
     getAsset: builder.query<IGetAssetResponse, IGetAssetRequest>({
-      query: ({ id = '' }) => `assets/${id && `${id}`}`,
-    }),
+      query: ({ id = '' }) => `/trpc/currensyInfo?input="${id && `${id}`}"`,
+    }), 
     getAssetHistory: builder.query<
       IGetAssetHisoryResponse,
       IGetAssetHisoryRequest
