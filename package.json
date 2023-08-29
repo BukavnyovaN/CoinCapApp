@@ -12,8 +12,12 @@
     "client:build": "npm run build --prefix client",
     "client:start": "npm run start --prefix client",
     "server:build": "npm run build --prefix server",
-    "server:start-dev": "npm run dev --prefix server"
+    "server:start-dev": "npm run dev --prefix server",
+    "test:cypress" : "cypress open"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.17.4"
+  }
 }
