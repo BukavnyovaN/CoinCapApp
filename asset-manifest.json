@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/CoinCapApp/static/css/main.98cc92ca.css",
+    "main.css": "/CoinCapApp/static/css/main.c8a227fb.css",
     "main.js": "/CoinCapApp/static/js/main.d700a7f6.js",
     "index.html": "/CoinCapApp/index.html",
-    "main.98cc92ca.css.map": "/CoinCapApp/static/css/main.98cc92ca.css.map",
+    "main.c8a227fb.css.map": "/CoinCapApp/static/css/main.c8a227fb.css.map",
     "main.d700a7f6.js.map": "/CoinCapApp/static/js/main.d700a7f6.js.map"
   },
   "entrypoints": [
-    "static/css/main.98cc92ca.css",
+    "static/css/main.c8a227fb.css",
     "static/js/main.d700a7f6.js"
   ]
 }
