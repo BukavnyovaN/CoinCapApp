@@ -8,7 +8,7 @@ import './Cart.scss';
 import { currenciesToDict } from '../../utils/groupCurrenciesByName';
 import { trpc } from '../../utils/trpc';
 
-const Cart: FC = () => {
+export function Cart(){
   const dispatch = useAppDispatch();
 
   const openModal = () => {
@@ -88,4 +88,3 @@ const Cart: FC = () => {
   );
 };
 
-export { Cart };

@@ -1,12 +1,12 @@
 @import '../../sass/constants.scss';
 
-.currency-wrapper {
+.page-currency {
   width: 60%;
   display: flex;
   flex-direction: column;
 }
 
-.currency-details_wrapper {
+.page-currency_details {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,7 @@
   border-radius: $base;
 }
 
-.circle {
+.page-currency_circle {
   display: flex;
   align-items: center;
   justify-content: center;

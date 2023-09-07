@@ -7,7 +7,7 @@ import { addCurrencyInfoToCart } from '../../../store/cartSlice';
 import { Icon } from '@iconify/react';
 import './ModalWindow.scss';
 
-const ModalWindow: FC = () => {
+export function ModalWindow(){
   const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
   const { id, name, symbol, priceUsd } = useAppSelector(
     ({ currencyInfo }) => currencyInfo
@@ -82,5 +82,3 @@ const ModalWindow: FC = () => {
     </>
   );
 };
-
-export { ModalWindow };

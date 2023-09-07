@@ -1,12 +1,8 @@
-import { FC } from 'react';
-
-const NotFound: FC = () => {
+export function NotFound(){
 
   return (
-    <div>
+    <div className='page__not-found'>
       <h2>Not found :c</h2>
     </div>
   );
 };
-
-export { NotFound };
