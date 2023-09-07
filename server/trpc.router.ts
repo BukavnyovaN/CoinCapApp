@@ -3,6 +3,7 @@ import axios from 'axios';
 import { z } from 'zod';
 
 export const t = initTRPC.create();
+const url = `http://api.coincap.io/v2/assets`;
 
 export const trpcRouter = t.router({
   assets: t.procedure
@@ -11,44 +12,56 @@ export const trpcRouter = t.router({
     const ids = opts.input.ids || '';
     const limit = opts.input.limit || '';
     const offset = opts.input.offset || '';
-    const url = `http://api.coincap.io/v2/assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}${offset && `&offset=${offset}`}`;
-    return axios.get(url) // `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`
-        .then(function (response) {
-            return response.data.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .finally(function () {
-        });
+    try {
+      const response = await axios.get(
+        url,
+        {
+          params: {
+            limit,
+            ids,
+            offset
+          }
+        }
+      )
+      return response.data.data;
+    } catch(error) {
+        console.log(error);
+    }
   }),
   history: t.procedure
     .input(z.object({ id: z.string().optional(), interval: z.string() }))
     .query(async (opts) => {
       const id = opts.input.id || '';
       const interval = opts.input.interval;
-      return axios.get(`https://api.coincap.io/v2/assets/${id}/history${interval && `?interval=${interval}`}`)
-        .then(function (response) {
-            return response.data.data;
-        })
-        .catch(function (error) {
+      try {
+        const response = await axios.get(
+          url,
+          {
+            params: {
+              id,
+              interval,
+            }
+          }
+        )
+        return response.data.data;
+      }catch(error) {
             console.log(error);
-        })
-        .finally(function () {
-        });
+        }
     }),
   currencyInfo: t.procedure
     .input(z.object({id: z.string().optional()}))
     .query(async (opts) => {
       const id = opts.input.id;
-      return axios.get(`https://api.coincap.io/v2/assets/${id && `${id}`}`)
-        .then(function (response) {
+      try {
+        const response = await axios.get(url,
+          {
+            params: {
+              id
+            }
+          })
             return response.data.data;
-        })
-        .catch(function (error) {
+      }catch(error) {
             console.log(error);
-        })
-        .finally(function () {
-        });
+      }
     }),
 });
