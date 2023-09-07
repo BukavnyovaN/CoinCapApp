@@ -9,7 +9,7 @@ import { convertToThousands } from '../../utils/convertToThousands';
 
 import './Header.scss';
 
-const Header: FC = () => {
+export function Header() {
   const { MAIN } = PATHS;
   const headerCurrencies = trpc.assets.useQuery({ limit: 3 });
 
@@ -56,5 +56,3 @@ const Header: FC = () => {
     </>
   );
 };
-
-export { Header };

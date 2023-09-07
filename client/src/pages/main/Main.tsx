@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { TableHead, TableRow, Button, ModalWindow } from '../../components';
@@ -6,7 +6,7 @@ import { trpc } from '../../utils/trpc';
 
 import './Main.scss';
 
-const Main: FC = () => {
+export function Main() {
   const [limit, setLimit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
   
@@ -25,13 +25,13 @@ const Main: FC = () => {
   };
 
   return (
-    <div className='main-wrapper'>
-      <table className='table'>
+    <div className='page-main'>
+      <table className='page-main_table'>
         <TableHead />
         <tbody>
           {currencyQuery.isLoading && (
-            <tr>
-              <th colSpan={8}>Loading...</th>
+            <tr className='page-main_table-tr'>
+              <th className='page-main_table-th' colSpan={8}>Loading...</th>
             </tr>
           )}
           {!currencyQuery.isLoading &&
@@ -57,7 +57,7 @@ const Main: FC = () => {
             )}
         </tbody>
       </table>
-      <div className='button-wrapper'>
+      <div className='page-main_button-wrapper'>
         <Button
           className='button-primary'
           description='<<'
@@ -74,4 +74,3 @@ const Main: FC = () => {
   );
 };
 
-export { Main };

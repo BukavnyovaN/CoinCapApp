@@ -9,7 +9,7 @@ import { Icon } from '@iconify/react';
 import './ModalCart.scss';
 import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
 
-const ModalCart: FC = () => {
+export function ModalCart() {
   const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);
   const currentCartList = useAppSelector(({ cart }) => cart.cartList);
   const currentCartTotal = useAppSelector(({ cart }) => cart.total);
@@ -92,5 +92,3 @@ const ModalCart: FC = () => {
     </>
   );
 };
-
-export { ModalCart };

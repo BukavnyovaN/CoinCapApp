@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './header/Header';
 
-const Layout: FC = () => {
+export function Layout(){
   return (
     <div>
       <Header />
@@ -12,5 +12,3 @@ const Layout: FC = () => {
     </div>
   );
 };
-
-export { Layout };

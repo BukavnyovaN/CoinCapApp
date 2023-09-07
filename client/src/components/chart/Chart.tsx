@@ -42,7 +42,7 @@ export interface IChart {
   name: string;
 }
 
-const Chart: FC<IChart> = ({ labelsChart, dataChart, name }) => {
+export function Chart ({ labelsChart, dataChart, name } : IChart) {
   const data = {
     labels: labelsChart,
     datasets: [
@@ -57,5 +57,3 @@ const Chart: FC<IChart> = ({ labelsChart, dataChart, name }) => {
   };
   return <Line options={options} data={data} />;
 };
-
-export { Chart };

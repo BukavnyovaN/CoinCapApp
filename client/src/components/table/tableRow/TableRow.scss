@@ -1,6 +1,6 @@
 @import '../../../sass/constants.scss';
 
-.table-currency__wrapper {
+.table-currency {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,8 +32,8 @@
 }
 
 .table-currency__icon {
-  width: $base * 4;
-  height: $base * 4;
+  max-width: 24px;
+  max-height: auto;
 }
 
 .logo-wrapper {
@@ -48,4 +48,33 @@
 .logo {
   width: 100%;
   height: auto;
+}
+
+.table-row__td {
+  &:first-child {
+    text-align: center;
+  }
+  &:nth-child(4),
+  &:nth-child(6) {
+    @media (max-width: $breakpoint-lg-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(5),
+  &:nth-child(7) {
+    @media (max-width: $breakpoint-sm-min) {
+      display: none;
+    }
+  }
+
+  &:nth-child(8) {
+    @media (max-width: $breakpoint-xxs-min) {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: 12px;
+  }
 }

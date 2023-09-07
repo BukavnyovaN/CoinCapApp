@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-const TableHead: FC = () => {
+export function TableHead(){
   return (
     <thead>
       <tr>
@@ -17,4 +17,3 @@ const TableHead: FC = () => {
   );
 };
 
-export { TableHead };

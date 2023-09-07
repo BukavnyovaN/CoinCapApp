@@ -3,17 +3,15 @@ import React, { FC } from 'react';
 import './Button.scss';
 
 interface IButton {
-  className: 'button-primary' | 'button-secondary' | 'button-delete';
+  className: 'button-primary' | 'button-secondary' | 'button-delete' | 'button';
   description: string | any;
   onClick?: () => void;
 }
 
-const Button: FC<IButton> = ({ className, description, onClick }) => {
+export function Button ({ className, description, onClick } : IButton) {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={`button ${className}`} onClick={onClick}>
       {description}
     </button>
   );
 };
-
-export { Button };
