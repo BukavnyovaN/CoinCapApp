@@ -29,16 +29,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addCurrencyInfoToCart: (state, action: PayloadAction<ICart>) => {
-      // const isCurrencyExist = state.cartList.find(
-      //   ({ id }) => id === action.payload.id
-      // );
-
-      // if (isCurrencyExist) {
-      //   isCurrencyExist.amount += action.payload.amount;
-      //   return state;
-      // } else {
-      state.cartList.push(action.payload);
-      // }
+      state.cartList.push(action.payload);// }
     },
     removeCurrencyInfoFromCart: (state, action: PayloadAction<string>) => {
       state.cartList = state.cartList.filter(({ id }) => id !== action.payload);
@@ -47,15 +38,6 @@ export const cartSlice = createSlice({
       state.total = action.payload;
     },
     updateCart: (state, action: PayloadAction<IAssets[] | undefined>) => {
-      // const tempState = [...state.cartList];
-      // if (tempState.length && action.payload?.length) {
-      //   for (let i = 0; i < tempState.length; i += 1) {
-      //     tempState[i].priceUsd = action.payload[i].priceUsd
-      //       ? action.payload[i].priceUsd
-      //       : tempState[i].priceUsd;
-      //   }
-      //   state.cartList = tempState;
-      // }
     },
   },
 });

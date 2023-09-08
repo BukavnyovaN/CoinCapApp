@@ -1,14 +1,16 @@
 import { initTRPC } from '@trpc/server';
 import axios from 'axios';
 import { z } from 'zod';
+import { configs } from "./configs";
 
 export const t = initTRPC.create();
-const url = `http://api.coincap.io/v2/assets`;
+const baseUrl = configs.coincap.baseUrl;
 
 export const trpcRouter = t.router({
   assets: t.procedure
   .input(z.object({ limit: z.number().optional(), ids: z.string().optional(), offset: z.number().optional() }))
   .query(async (opts) => {
+    const url = baseUrl;
     const ids = opts.input.ids || '';
     const limit = opts.input.limit || '';
     const offset = opts.input.offset || '';
@@ -29,16 +31,16 @@ export const trpcRouter = t.router({
     }
   }),
   history: t.procedure
-    .input(z.object({ id: z.string().optional(), interval: z.string() }))
+    .input(z.object({ id: z.string().optional(), interval: z.string().optional() }))
     .query(async (opts) => {
       const id = opts.input.id || '';
-      const interval = opts.input.interval;
+      const url = new URL(`${id}/history`, baseUrl).href
+      const interval = opts.input.interval || '';
       try {
         const response = await axios.get(
           url,
           {
             params: {
-              id,
               interval,
             }
           }
@@ -51,15 +53,14 @@ export const trpcRouter = t.router({
   currencyInfo: t.procedure
     .input(z.object({id: z.string().optional()}))
     .query(async (opts) => {
-      const id = opts.input.id;
+      const id = opts.input.id || '';
+      const url = new URL(id, baseUrl).href;
       try {
-        const response = await axios.get(url,
-          {
-            params: {
-              id
-            }
-          })
-            return response.data.data;
+        const response = await axios.get(
+          url
+        );
+        console.log( response.data.data)
+        return response.data.data;
       }catch(error) {
             console.log(error);
       }

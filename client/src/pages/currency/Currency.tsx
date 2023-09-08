@@ -46,6 +46,9 @@ export function Currency(){
     dispatch(open());
   };
 
+  console.log(currencyInfo.data)
+  console.log(currencyHistory.data)
+
   return (
     <div className='page-currency'>
       {currencyInfo.isLoading && <div>Loading...</div>}
