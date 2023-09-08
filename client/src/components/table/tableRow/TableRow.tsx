@@ -1,7 +1,6 @@
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { IAssets } from '../../../API/coincap';
+import { IAssets } from '../../../store/cartSlice';
 import {
   addCurrencyId,
   addCurrencyName,

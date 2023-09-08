@@ -1,7 +1,5 @@
-import React, { FC } from 'react';
-
-import { PATHS } from '../../constants/paths';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from '../../hooks/hooks';
 import { open } from '../../store/modalWindowSlice';
 import {
@@ -10,6 +8,7 @@ import {
   addCurrencySymbol,
   addCurrencyPriceUsd,
 } from '../../store/currencyInfoSlice';
+import { PATHS } from '../../constants/paths';
 import { convertToMillions } from '../../utils/convertToMillions';
 import { convertToPercentage } from '../../utils/convertToPercentage';
 import { convertToThousands } from '../../utils/convertToThousands';

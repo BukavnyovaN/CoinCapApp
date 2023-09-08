@@ -1,5 +1,3 @@
-import React, { FC } from 'react';
-
 export function TableHead(){
   return (
     <thead>

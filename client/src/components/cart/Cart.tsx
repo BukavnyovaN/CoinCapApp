@@ -1,12 +1,14 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Icon } from '@iconify/react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { ICart, handleTotalCart, updateCart } from '../../store/cartSlice';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { open } from '../../store/modalCartSlice';
-import { Icon } from '@iconify/react';
-import './Cart.scss';
 import { currenciesToDict } from '../../utils/groupCurrenciesByName';
 import { trpc } from '../../utils/trpc';
+
+import './Cart.scss';
 
 export function Cart(){
   const dispatch = useAppDispatch();

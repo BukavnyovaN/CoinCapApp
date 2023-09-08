@@ -1,13 +1,14 @@
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
+
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { ICart, removeCurrencyInfoFromCart } from '../../../store/cartSlice';
+import { removeCurrencyInfoFromCart } from '../../../store/cartSlice';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { close } from '../../../store/modalCartSlice';
-import { Icon } from '@iconify/react';
-import './ModalCart.scss';
 import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
+
+import './ModalCart.scss';
 
 export function ModalCart() {
   const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);

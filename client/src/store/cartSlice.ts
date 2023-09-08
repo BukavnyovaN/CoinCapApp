@@ -1,6 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { IAssets } from '../API/coincap';
+
+export interface IAssets {
+  id?: string;
+  rank: string;
+  symbol: string;
+  name: string;
+  supply: string;
+  maxSupply?: string;
+  marketCapUsd: string;
+  volumeUsd24Hr: string;
+  priceUsd: string;
+  changePercent24Hr: string;
+  vwap24Hr: string;
+}
 
 export interface ICart {
   id: string;
@@ -29,7 +42,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addCurrencyInfoToCart: (state, action: PayloadAction<ICart>) => {
-      state.cartList.push(action.payload);// }
+      state.cartList.push(action.payload);
     },
     removeCurrencyInfoFromCart: (state, action: PayloadAction<string>) => {
       state.cartList = state.cartList.filter(({ id }) => id !== action.payload);

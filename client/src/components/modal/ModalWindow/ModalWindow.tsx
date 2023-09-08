@@ -1,10 +1,12 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import { Icon } from '@iconify/react';
+
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { close } from '../../../store/modalWindowSlice';
 import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
 import { addCurrencyInfoToCart } from '../../../store/cartSlice';
-import { Icon } from '@iconify/react';
+
 import './ModalWindow.scss';
 
 export function ModalWindow(){

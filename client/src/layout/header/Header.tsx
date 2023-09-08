@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
 import { Icon } from '@iconify/react';
 import { trpc } from '../../utils/trpc';
 
