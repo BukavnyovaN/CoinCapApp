@@ -16,7 +16,7 @@ export const trpcRouter = t.router({
     const offset = opts.input.offset || '';
     try {
       const response = await axios.get(
-        url,
+          url,
         {
           params: {
             limit,
@@ -59,7 +59,6 @@ export const trpcRouter = t.router({
         const response = await axios.get(
           url
         );
-        console.log( response.data.data)
         return response.data.data;
       }catch(error) {
             console.log(error);

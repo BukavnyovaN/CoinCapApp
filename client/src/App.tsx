@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import React, { useState } from 'react';
-import { trpc } from './utils/trpc';
 
+import { trpc } from './utils/trpc';
 import { Main, Currency, NotFound } from './pages';
 import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
@@ -12,7 +12,14 @@ import { configs } from "./configs";
 
 
 function App() {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false, // default: true
+        keepPreviousData: true,
+      },
+    },
+  }));
   const [trpcClient] = useState(() => trpc.createClient({
     links: [
       httpBatchLink({

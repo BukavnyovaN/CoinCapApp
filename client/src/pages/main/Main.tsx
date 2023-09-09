@@ -7,7 +7,7 @@ import { trpc } from '../../utils/trpc';
 import './Main.scss';
 
 export function Main() {
-  const [limit, setLimit] = useState<number>(10);
+  const limit = 10;
   const [offset, setOffset] = useState<number>(0);
   
   const currencyQuery = trpc.assets.useQuery({ids: '', limit, offset})
@@ -19,9 +19,7 @@ export function Main() {
     setOffset(offset + 10);
   };
   const decreaseOffset = () => {
-    if (offset >= 10) {
       setOffset(offset - 10);
-    }
   };
 
   return (
@@ -62,6 +60,7 @@ export function Main() {
           className='button-primary'
           description='<<'
           onClick={decreaseOffset}
+          disabled={!offset}
         />
         <Button
           className='button-primary'
