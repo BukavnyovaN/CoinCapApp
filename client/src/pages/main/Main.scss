@@ -2,65 +2,70 @@
 
 .page-main {
   text-align: center;
-}
 
-.page-main_table {
-  width: 100%;
-  margin: $base * 2;
-  text-align: center;
-  border-collapse: collapse;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
-    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-
-  @media (max-width: $breakpoint-sm-min) {
-    margin: 0;
-  }
-}
-
-.page-main_table-tr {
-  border-bottom: 1px solid $color-dark;
-}
-
-.page-main_table-th {
-  @media (max-width: $breakpoint-sm-min) {
-    font-size: x-small;
-  }
-
-  @media (max-width: $breakpoint-xxs-min) {
-    font-size: 12px;
-  }
-
-  &:first-child {
+  .page-main_table {
+    width: 100%;
+    margin: $base * 2;
     text-align: center;
-  }
-  &:nth-child(2) {
-    text-align: left;
-  }
-
-  &:nth-child(4),
-  &:nth-child(6) {
-    @media (max-width: $breakpoint-lg-min) {
-      display: none;
-    }
-  }
-
-  &:nth-child(5),
-  &:nth-child(7) {
+    border-collapse: collapse;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+      rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  
     @media (max-width: $breakpoint-sm-min) {
-      display: none;
+      margin: 0;
     }
+
+    .page-main_table-tr {
+      border-bottom: 1px solid $color-dark;
+    }
+    
+    .page-main_table-th {
+      @media (max-width: $breakpoint-sm-min) {
+        font-size: x-small;
+      }
+    
+      @media (max-width: $breakpoint-xxs-min) {
+        font-size: 12px;
+      }
+    
+      &:first-child {
+        text-align: center;
+      }
+      &:nth-child(2) {
+        text-align: left;
+      }
+    
+      &:nth-child(4),
+      &:nth-child(6) {
+        @media (max-width: $breakpoint-lg-min) {
+          display: none;
+        }
+      }
+    
+      &:nth-child(5),
+      &:nth-child(7) {
+        @media (max-width: $breakpoint-sm-min) {
+          display: none;
+        }
+      }
+    
+      &:nth-child(8) {
+        @media (max-width: $breakpoint-xs-min) {
+          display: none;
+        }
+      }
+    }    
   }
 
-  &:nth-child(8) {
-    @media (max-width: $breakpoint-xxs-min) {
-      display: none;
-    }
+  .page-main_button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $base*4;
   }
 }
 
-.page-main_button-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: $base*4;
-}
+
+
+
+
