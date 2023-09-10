@@ -4,7 +4,7 @@ import {updateBitcoinPrice} from "./update-bitcoin-price";
 
 describe('CoinCapApp E2E tests', () => {
     it('Main page e2e tests', () => {
-      cy.visit('https://bukavnyovan.github.io/CoinCapApp/');
+      cy.visit('/');
 
       //check if the button Add exists
       cy.get('div:nth-child(1) > div:nth-child(1) > main:nth-child(4) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > button:nth-child(2)')
@@ -36,8 +36,9 @@ describe('CoinCapApp E2E tests', () => {
       // check closing modal window by clicking outside of the modal window
       cy.get('div:nth-child(1) > div:nth-child(1) > main:nth-child(4) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > button:nth-child(2)')
         .click()
+      cy.wait(1000)
       cy.get('main')
-        .click()
+        .click(40, 40)
 
       // check pagination
       cy.get('button')
@@ -64,7 +65,7 @@ describe('CoinCapApp E2E tests', () => {
     })
 
     it('Header e2e tests', () => {
-      cy.visit('https://bukavnyovan.github.io/CoinCapApp/');
+      cy.visit('/');
 
       //check if the header contains 3 crypocurrencies
       cy.get('.header-currency__wrapper')
@@ -93,7 +94,7 @@ describe('CoinCapApp E2E tests', () => {
     })
 
     it('Cart e2e tests', () => {
-      cy.visit('https://bukavnyovan.github.io/CoinCapApp/');
+      cy.visit('/');
       cy.get('div:nth-child(1) > div:nth-child(1) > main:nth-child(4) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > button:nth-child(2)')
         .should('have.text', 'Add');
       cy.get('div:nth-child(1) > div:nth-child(1) > main:nth-child(4) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > button:nth-child(2)')
