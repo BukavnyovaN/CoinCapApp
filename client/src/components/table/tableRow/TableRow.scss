@@ -9,7 +9,7 @@
   padding: $base;
 }
 
-.table-currency__name-wrapper {
+.table-row__currencies {
   display: flex;
   align-items: right;
   gap: $base;
@@ -20,7 +20,7 @@
   }
 }
 
-.table-currency__name {
+.table-row__currencies-name {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,23 +35,9 @@
   }
 }
 
-.table-currency__icon {
+.table-row__currencies-icon {
   max-width: 24px;
   max-height: auto;
-}
-
-.logo-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: $base * 40;
-  color: #000;
-}
-
-.logo {
-  width: 100%;
-  height: auto;
 }
 
 .table-row__td {

@@ -1,7 +1,7 @@
 import './Button.scss';
 
 interface IButton {
-  className: 'button-primary' | 'button-secondary' | 'button-delete' | 'button';
+  className: 'button_primary' | 'button_secondary' | 'button_delete' | 'button';
   description: string | any;
   onClick?: () => void;
   disabled?: boolean | any;

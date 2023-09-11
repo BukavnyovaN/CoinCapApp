@@ -50,34 +50,34 @@ export function Currency(){
       {currencyInfo.isLoading && <div>Loading...</div>}
       {!currencyInfo.isLoading && currencyInfo.data && (
         <>
-          <div className='page-currency_details'>
-            <div className='page-currency_circle'>
+          <div className='page-currency__info'>
+            <div className='page-currency__info-circle'>
               <h4>Rank</h4>
               <h5>{currencyInfo.data.rank}</h5>
             </div>
-            <div className='page-currency_circle'>
+            <div className='page-currency__info-circle'>
               <h4>{`${currencyInfo.data.name} (${currencyInfo.data.symbol})`}</h4>
               <h5>
                 {convertToThousands(currencyInfo.data.priceUsd)} (
                 {`${convertToPercentage(currencyInfo.data.changePercent24Hr)}%`})
               </h5>
             </div>
-            <div className='page-currency_circle'>
+            <div className='page-currency__info-circle'>
               <h4>Market Cap</h4>
               <h5>{convertToMillions(currencyInfo.data.marketCapUsd)}</h5>
             </div>
-            <div className='page-currency_circle'>
+            <div className='page-currency__info-circle'>
               <h4>Supply</h4>
               <h5>{`${convertToMillions(currencyInfo.data.supply)} ${
                 currencyInfo.data.symbol
               }`}</h5>
             </div>
-            <div className='page-currency_circle'>
+            <div className='page-currency__info-circle'>
               <h4>Volume (24Hr)</h4>
               <h5>{convertToMillions(currencyInfo.data.volumeUsd24Hr)}</h5>
             </div>
             <Button
-              className='button-secondary'
+              className='button_secondary'
               description='+'
               onClick={handleCurrency}
             />

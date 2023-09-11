@@ -10,7 +10,7 @@
   background-color: #2a5f61;
 }
 
-.header-currencies {
+.header__currencies {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +26,7 @@
   }
 }
 
-.header-currency__wrapper {
+.header__currencies-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,13 +44,7 @@
   gap: $base;
 }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.header-currency__name {
+.header__currencies-item-name {
   display: flex;
   align-items: flex-start;
   justify-content: right;
@@ -66,18 +60,20 @@
   }
 }
 
-.header-currency__icon {
+.header__currencies-item-icon {
   width: $base * 4;
   height: $base * 4;
 }
 
-.logo-wrapper {
+.header__logo {
   display: flex;
+  align-items: center;
+  gap: $base * 2;
   min-width: $base * 20;
   height: $base * 12;
 }
 
-.logo-name {
+.header__logo-name {
   color: #ffffff;
   text-align: center;
   font-size: 18px;
@@ -85,16 +81,4 @@
   @media (max-width: $breakpoint-xs-min) {
     display: none;
   }
-}
-
-.header-currencies_cart {
-  @media (max-width: $breakpoint-xs-min) {
-    width: $base * 12;
-    height: $base * 12;
-  }
-}
-
-.logo {
-  width: 100%;
-  height: auto;
 }

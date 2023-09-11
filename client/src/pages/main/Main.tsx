@@ -24,12 +24,12 @@ export function Main() {
 
   return (
     <div className='page-main'>
-      <table className='page-main_table'>
+      <table className='page-main__table'>
         <TableHead />
         <tbody>
           {currencyQuery.isLoading && (
-            <tr className='page-main_table-tr'>
-              <th className='page-main_table-th' colSpan={8}>Loading...</th>
+            <tr className='page-main__table-tr'>
+              <th className='page-main__table-tr-th' colSpan={8}>Loading...</th>
             </tr>
           )}
           {!currencyQuery.isLoading &&
@@ -55,15 +55,15 @@ export function Main() {
             )}
         </tbody>
       </table>
-      <div className='page-main_button-wrapper'>
+      <div className='page-main__buttons'>
         <Button
-          className='button-primary'
+          className='button_primary'
           description='<<'
           onClick={decreaseOffset}
           disabled={!offset}
         />
         <Button
-          className='button-primary'
+          className='button_primary'
           description='>>'
           onClick={increaseOffset}
         />

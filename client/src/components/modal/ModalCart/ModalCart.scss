@@ -1,13 +1,40 @@
 @import '../../../sass/constants.scss';
+@import '../ModalWindow/ModalWindow.scss';
+@import "../../../index.scss";
+@import "../../table/tableRow/TableRow.scss";
 
-.flex_space-between {
-  display: flex;
-  gap: $base * 4;
-  justify-content: space-between;
-  align-items: center;
+.modal-cart {
+  @extend .modal-window;
 }
 
-.modal-window_total {
+.modal-cart__currencies {
+  @extend .flex_space-between;
+  gap: $base * 3;
+}
+
+.modal-cart__total {
   font-size: large;
   font-weight: 700;
+}
+
+.modal-cart__currencies-name {
+  display: flex;
+  align-items: right;
+  gap: $base;
+  color: $color-black;
+  &:hover {
+    div {
+      text-decoration: underline;
+    }
+  }
+}
+
+.modal-cart__currencies-icon {
+  align-self: center;
+  width: $base * 4;
+  height: $base * 4;
+}
+
+.modal-cart__currencies-info {
+  @extend .table-row__currencies-name
 }

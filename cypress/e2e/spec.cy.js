@@ -30,7 +30,7 @@ describe('CoinCapApp E2E tests', () => {
 
       cy.get('div:nth-child(1) > div:nth-child(1) > main:nth-child(4) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > button:nth-child(2)')
         .click()
-      cy.get('.modal-window_button-wrapper > .button-delete')
+      cy.get('.modal-window_button-wrapper > .button_delete')
         .click()
 
       // check closing modal window by clicking outside of the modal window
@@ -107,7 +107,7 @@ describe('CoinCapApp E2E tests', () => {
         .click()
       cy.get('.cart-wrapper')
         .click()
-      cy.get('.flex_space-between > .button-delete')
+      cy.get('.flex_space-between > .button_delete')
         .click()
 
         cy.get(`.modal-window_total`).then(($total) => {
@@ -115,7 +115,7 @@ describe('CoinCapApp E2E tests', () => {
           expect(totalSum).equal(0)
       })
 
-      cy.get(".modal_window-wrapper > .button-delete")
+      cy.get(".modal_window-wrapper > .button_delete")
         .click()
 
     })

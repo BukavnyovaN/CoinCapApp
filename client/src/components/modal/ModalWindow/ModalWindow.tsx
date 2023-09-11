@@ -42,7 +42,7 @@ export function ModalWindow(){
   return (
     <>
       <div
-        className={`modal_window-wrapper ${
+        className={`modal-window ${
           !isModalAddOpen ? 'display_none' : ''
         }`}
       >
@@ -53,18 +53,18 @@ export function ModalWindow(){
           max='999'
           name=''
           id=''
-          className='input-number'
+          className='modal-window__input'
           value={amount}
           onChange={handleInputNumber}
         />
-        <div className='modal-window_button-wrapper'>
+        <div className='modal-window__buttons'>
           <Button
-            className='button-primary'
+            className='button_primary'
             description='Submit'
             onClick={handleSubmit}
           />
           <Button
-            className='button-delete'
+            className='button_delete'
             description={
               <Icon
                 icon='ic:round-close'

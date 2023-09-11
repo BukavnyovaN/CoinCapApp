@@ -13,21 +13,21 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    className: 'button-primary',
+    className: 'button_primary',
     description: 'Primary button!',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    className: 'button-secondary',
+    className: 'button_secondary',
     description: 'Secondary button!',
   },
 };
 
 export const Delete: Story = {
   args: {
-    className: 'button-delete',
+    className: 'button_delete',
     description: 'Delete button!',
   },
 };

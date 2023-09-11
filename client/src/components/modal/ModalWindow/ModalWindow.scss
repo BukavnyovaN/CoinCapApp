@@ -1,6 +1,6 @@
 @import '../../../sass/constants.scss';
 
-.modal_window-wrapper {
+.modal-window {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -29,14 +29,14 @@
   }
 }
 
-.modal-window_button-wrapper {
+.modal-window__buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: $base * 3;
 }
 
-.input-number {
+.modal-window__input {
   display: block;
   height: 35%;
   margin: 0 auto;

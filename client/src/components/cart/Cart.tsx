@@ -60,10 +60,10 @@ export function Cart(){
   }, [currentCartTotal]);
 
   return (
-    <div className='cart-wrapper' onClick={openModal}>
-      <div className='cart-wrapper_logo'>
+    <div className='cart' onClick={openModal}>
+      <div className='cart__logo'>
         <Icon
-          className='header-currencies_cart'
+          className='cart__logo-currencies'
           icon='grommet-icons:money'
           color='white'
           width='36'
@@ -71,8 +71,8 @@ export function Cart(){
         />
         <div>{convertToThousands(currentCartTotal.toString())}</div>
       </div>
-      <div className='cart-wrapper_info'>
-        <div className='cart-wrapper_info-details'>
+      <div className='cart__info'>
+        <div className='cart__info-details'>
           <Icon
             icon='fa6-solid:chart-line'
             color='white'
@@ -81,7 +81,7 @@ export function Cart(){
           />
           {`${convertToThousands(difference.toString())}`}
         </div>
-        <div className='cart-wrapper_info-details'>
+        <div className='cart__info-details'>
           <Icon icon='ic:sharp-percent' color='white' width='16' height='16' />
           {`${percentage.toFixed(2)}%`}
         </div>

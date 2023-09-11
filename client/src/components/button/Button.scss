@@ -28,7 +28,7 @@
 
 }
 
-.button-primary {
+.button_primary {
   color: $color-white;
   display: block;
   font-size: $fs-xxl;
@@ -46,7 +46,7 @@
   }
 }
 
-.button-secondary {
+.button_secondary {
   display: block;
   color: $color-black;
   background-color: $color-white;
@@ -70,7 +70,7 @@
   }
 }
 
-.button-delete {
+.button_delete {
   display: block;
   margin: $base * 2 auto;
   background-color: $color-primary;

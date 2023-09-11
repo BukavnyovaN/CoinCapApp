@@ -1,36 +1,42 @@
 @import '../../sass/constants.scss';
 
-.cart-wrapper {
+.cart {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: $base * 5;
   cursor: pointer;
 
-  .cart-wrapper_info {
+  .cart__info {
     display: flex;
     align-items: center;
     flex-direction: column;
     color: $color-white;
     font-weight: 700;
     gap: $base * 2;
-  
+
+    .cart__info-details {
+      display: flex;
+      gap: $base;
+      @media (max-width: $breakpoint-xs-min) {
+        display: none;
+      }
+    }  
   }
   
-  .cart-wrapper_logo {
+  .cart__logo {
     flex-direction: column;
     display: flex;
     align-items: center;
     gap: $base;
     color: $color-white;
-  }
-  
-  .cart-wrapper_info-details {
-    display: flex;
-    gap: $base;
-    @media (max-width: $breakpoint-xs-min) {
-      display: none;
+
+    .cart__logo-currencies {
+      @media (max-width: $breakpoint-xs-min) {
+        width: $base * 12;
+        height: $base * 12;
+      }
     }
-  }  
+  }
 }
 

@@ -15,7 +15,7 @@ export function Header() {
   return (
     <>
       <header className='header wrapper'>
-        <div className='header-currencies'>
+        <div className='header__currencies'>
           {headerCurrencies.isLoading && <div>Loading...</div>}
           {!headerCurrencies.isLoading &&
             headerCurrencies.data &&
@@ -24,14 +24,14 @@ export function Header() {
                 <Link
                   to={`/CoinCapApp/currency/${currency.id}`}
                   key={currency.id}
-                  className='header-currency__wrapper'
+                  className='header__currencies-item'
                 >
                   <img
-                    className='header-currency__icon'
+                    className='header__currencies-item-icon'
                     src={`https://assets.coincap.io/assets/icons/${currency.symbol.toLowerCase()}@2x.png`}
                     alt={currency.currencysymbol}
                   />
-                  <div className='header-currency__name'>
+                  <div className='header__currencies-item-name'>
                     <div>{`${currency.name}`}</div>
                     <div>{`${currency.symbol}`}</div>
                   </div>
@@ -40,14 +40,14 @@ export function Header() {
               );
             })}
         </div>
-        <Link to={MAIN} className='logo-wrapper'>
+        <Link to={MAIN} className='header__logo'>
           <Icon
             icon='game-icons:abstract-006'
             color='#ffffff'
             width='24'
             height='24'
           />
-          <p className='logo-name'>COIN CAP APP</p>
+          <p className='header__logo-name'>COIN CAP APP</p>
         </Link>
         <Cart />
       </header>

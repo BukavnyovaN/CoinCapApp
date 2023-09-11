@@ -29,7 +29,7 @@ export function ModalCart() {
   return (
     <>
       <div
-        className={`modal_window-wrapper ${
+        className={`modal-cart ${
           !isModalCartOpen ? 'display_none' : ''
         }`}
       >
@@ -40,18 +40,18 @@ export function ModalCart() {
           groupedCurrenciesList.map(
             ({ id, name, symbol, priceUsd, amount, datetime }) => {
               return (
-                <div key={datetime} className='flex_space-between'>
+                <div key={datetime} className='modal-cart__currencies'>
                   <Link
-                    to={`/${id}`}
-                    className='header-currency__name-wrapper'
+                    to={`/CoinCapApp/currency/${id}`}
+                    className='modal-cart__currencies-name'
                     onClick={closeModal}
                   >
                     <img
                       src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
                       alt={symbol}
-                      className='header-currency__icon'
+                      className='modal-cart__currencies-icon'
                     />
-                    <div className='table-currency__name'>
+                    <div className='.modal-cart__currencies-info'>
                       <div>{`${name}`}</div>
                       <div>{`${symbol}`}</div>
                     </div>
@@ -61,7 +61,7 @@ export function ModalCart() {
                     (+priceUsd).toString()
                   )}`}</div>
                   <button
-                    className='button-delete'
+                    className='button_delete'
                     onClick={() => deleteCurrency(id)}
                   >
                     <Icon
@@ -75,11 +75,11 @@ export function ModalCart() {
               );
             }
           )}
-        <div className='modal-window_total'>{`Total: ${convertToThousands(
+        <div className='modal-cart__total'>{`Total: ${convertToThousands(
           currentCartTotal.toString()
         )}`}</div>
         <Button
-          className='button-delete'
+          className='button_delete'
           description={
             <Icon icon='ic:round-close' color='white' width='14' height='14' />
           }

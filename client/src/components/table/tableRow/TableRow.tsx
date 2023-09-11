@@ -38,25 +38,25 @@ export function TableRow ({
     dispatch(open());
   };
   return (
-    <tr className='table-row__tr'>
+    <tr className='table-row'>
       <td className='table-row__td' colSpan={1}>{rank}</td>
-      <td colSpan={2} className='table-row_td table-currency'>
+      <td colSpan={2} className='table-row__td table-currency'>
         <Link
           to={`/CoinCapApp/currency/${id}`}
-          className='table-currency__name-wrapper'
+          className='table-row__currencies'
         >
           <img
             src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
             alt={symbol}
-            className='table-currency__icon'
+            className='table-row__currencies-icon'
           />
-          <div className='table-currency__name'>
+          <div className='table-row__currencies-name'>
             <div>{`${name}`}</div>
             <div>{`${symbol}`}</div>
           </div>
         </Link>
         <Button
-          className='button-secondary'
+          className='button_secondary'
           description='Add'
           onClick={handleCurrency}
         />

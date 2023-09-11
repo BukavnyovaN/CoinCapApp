@@ -3,7 +3,7 @@
 .page-main {
   text-align: center;
 
-  .page-main_table {
+  .page-main__table {
     width: 100%;
     margin: $base * 2;
     text-align: center;
@@ -15,11 +15,11 @@
       margin: 0;
     }
 
-    .page-main_table-tr {
+    .page-main__table-tr {
       border-bottom: 1px solid $color-dark;
     }
     
-    .page-main_table-th {
+    .page-main__table-tr-th {
       @media (max-width: $breakpoint-sm-min) {
         font-size: x-small;
       }
@@ -57,7 +57,7 @@
     }    
   }
 
-  .page-main_button-wrapper {
+  .page-main__buttons {
     display: flex;
     justify-content: center;
     align-items: center;
