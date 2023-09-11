@@ -5,36 +5,38 @@
 
 .modal-cart {
   @extend .modal-window;
-}
 
-.modal-cart__currencies {
-  @extend .flex_space-between;
-  gap: $base * 3;
-}
-
-.modal-cart__total {
-  font-size: large;
-  font-weight: 700;
-}
-
-.modal-cart__currencies-name {
-  display: flex;
-  align-items: right;
-  gap: $base;
-  color: $color-black;
-  &:hover {
-    div {
-      text-decoration: underline;
+  &__currencies {
+    @extend .flex_space-between;
+    gap: $base * 3;
+  }
+  
+  &__total {
+    font-size: large;
+    font-weight: 700;
+  }
+  
+  &__currencies-name {
+    display: flex;
+    align-items: right;
+    gap: $base;
+    color: $color-black;
+    &:hover {
+      div {
+        text-decoration: underline;
+      }
     }
+  }
+  
+  &__currencies-icon {
+    align-self: center;
+    width: $base * 4;
+    height: $base * 4;
+  }
+  
+  &__currencies-info {
+    @extend .table-row__currencies-name
   }
 }
 
-.modal-cart__currencies-icon {
-  align-self: center;
-  width: $base * 4;
-  height: $base * 4;
-}
 
-.modal-cart__currencies-info {
-  @extend .table-row__currencies-name
-}

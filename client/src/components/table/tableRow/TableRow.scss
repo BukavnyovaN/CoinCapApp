@@ -1,5 +1,68 @@
 @import '../../../sass/constants.scss';
 
+.table-row {
+
+  &__currencies {
+    display: flex;
+    align-items: right;
+    gap: $base;
+  
+    @media (max-width: $breakpoint-xxs-min) {
+      gap: 0;
+      font-size: x-small;
+    }
+  }
+  
+  &__currencies-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $base;
+    color: $color-black;
+    transition: all $transition;
+  
+    &:hover {
+      div {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  &__currencies-icon {
+    max-width: 24px;
+    max-height: auto;
+  }
+  
+  &__td {
+    &:first-child {
+      text-align: center;
+    }
+    &:nth-child(4),
+    &:nth-child(6) {
+      @media (max-width: $breakpoint-lg-min) {
+        display: none;
+      }
+    }
+  
+    &:nth-child(5),
+    &:nth-child(7) {
+      @media (max-width: $breakpoint-sm-min) {
+        display: none;
+      }
+    }
+  
+    &:nth-child(8) {
+      @media (max-width: $breakpoint-xs-min) {
+        display: none;
+      }
+    }
+  
+    @media (max-width: $breakpoint-xxs-min) {
+      font-size: 12px;
+    }
+  }
+}
+
 .table-currency {
   display: flex;
   align-items: center;
@@ -7,64 +70,4 @@
   color: $color-black;
   gap: $base;
   padding: $base;
-}
-
-.table-row__currencies {
-  display: flex;
-  align-items: right;
-  gap: $base;
-
-  @media (max-width: $breakpoint-xxs-min) {
-    gap: 0;
-    font-size: x-small;
-  }
-}
-
-.table-row__currencies-name {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: $base;
-  color: $color-black;
-  transition: all $transition;
-
-  &:hover {
-    div {
-      text-decoration: underline;
-    }
-  }
-}
-
-.table-row__currencies-icon {
-  max-width: 24px;
-  max-height: auto;
-}
-
-.table-row__td {
-  &:first-child {
-    text-align: center;
-  }
-  &:nth-child(4),
-  &:nth-child(6) {
-    @media (max-width: $breakpoint-lg-min) {
-      display: none;
-    }
-  }
-
-  &:nth-child(5),
-  &:nth-child(7) {
-    @media (max-width: $breakpoint-sm-min) {
-      display: none;
-    }
-  }
-
-  &:nth-child(8) {
-    @media (max-width: $breakpoint-xs-min) {
-      display: none;
-    }
-  }
-
-  @media (max-width: $breakpoint-xxs-min) {
-    font-size: 12px;
-  }
 }

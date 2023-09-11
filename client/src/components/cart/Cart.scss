@@ -7,35 +7,35 @@
   gap: $base * 5;
   cursor: pointer;
 
-  .cart__info {
+  &__info {
     display: flex;
     align-items: center;
     flex-direction: column;
     color: $color-white;
     font-weight: 700;
     gap: $base * 2;
-
-    .cart__info-details {
-      display: flex;
-      gap: $base;
-      @media (max-width: $breakpoint-xs-min) {
-        display: none;
-      }
-    }  
   }
+
+  &__info-details {
+    display: flex;
+    gap: $base;
+    @media (max-width: $breakpoint-xs-min) {
+      display: none;
+    }
+  }  
   
-  .cart__logo {
+  &__logo {
     flex-direction: column;
     display: flex;
     align-items: center;
     gap: $base;
     color: $color-white;
+  }
 
-    .cart__logo-currencies {
-      @media (max-width: $breakpoint-xs-min) {
-        width: $base * 12;
-        height: $base * 12;
-      }
+  &__logo-currencies {
+    @media (max-width: $breakpoint-xs-min) {
+      width: $base * 12;
+      height: $base * 12;
     }
   }
 }

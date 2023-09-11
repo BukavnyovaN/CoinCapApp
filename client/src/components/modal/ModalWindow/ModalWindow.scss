@@ -27,21 +27,23 @@
   @media (max-width: $breakpoint-xs-min) {
     width: fit-content;
   }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $base * 3;
+  }
+  
+  &__input {
+    display: block;
+    height: 35%;
+    margin: 0 auto;
+    border-radius: $base * 2;
+    font-size: $fs-xl;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+      rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  }
 }
 
-.modal-window__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: $base * 3;
-}
 
-.modal-window__input {
-  display: block;
-  height: 35%;
-  margin: 0 auto;
-  border-radius: $base * 2;
-  font-size: $fs-xl;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
-    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-}

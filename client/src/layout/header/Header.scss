@@ -8,77 +8,72 @@
   justify-content: space-between;
   padding: $base * 2 0;
   background-color: #2a5f61;
-}
 
-.header__currencies {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  gap: $base;
-
-  @media (max-width: $breakpoint-lg-min) {
-    width: min-content;
-    flex-wrap: wrap;
-    font-size: small;
-    gap: 0;
-    justify-content: flex-start;
+  &__currencies {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    gap: $base;
+  
+    @media (max-width: $breakpoint-lg-min) {
+      width: min-content;
+      flex-wrap: wrap;
+      font-size: small;
+      gap: 0;
+      justify-content: flex-start;
+    }
   }
-}
 
-.header__currencies-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: $color-white;
-  gap: $base;
-  padding: $base;
-  @media (max-width: $breakpoint-xxs-min) {
-    display: none;
+  &__currencies-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $color-white;
+    gap: $base;
+    padding: $base;
+    @media (max-width: $breakpoint-xxs-min) {
+      display: none;
+    }
   }
-}
 
-.header-currency__name-wrapper {
-  display: flex;
-  align-items: right;
-  gap: $base;
-}
-
-.header__currencies-item-name {
-  display: flex;
-  align-items: flex-start;
-  justify-content: right;
-  gap: $base;
-  color: $color-white;
-  text-align: center;
-  transition: all $transition;
-
-  &:hover {
-    div {
-      text-decoration: underline;
+  &__currencies-item-name {
+    display: flex;
+    align-items: flex-start;
+    justify-content: right;
+    gap: $base;
+    color: $color-white;
+    text-align: center;
+    transition: all $transition;
+  
+    &:hover {
+      div {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  &__currencies-item-icon {
+    width: $base * 4;
+    height: $base * 4;
+  }
+  
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $base * 2;
+    min-width: $base * 20;
+    height: $base * 12;
+  }
+  
+  &__logo-name {
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+  
+    @media (max-width: $breakpoint-xs-min) {
+      display: none;
     }
   }
 }
 
-.header__currencies-item-icon {
-  width: $base * 4;
-  height: $base * 4;
-}
-
-.header__logo {
-  display: flex;
-  align-items: center;
-  gap: $base * 2;
-  min-width: $base * 20;
-  height: $base * 12;
-}
-
-.header__logo-name {
-  color: #ffffff;
-  text-align: center;
-  font-size: 18px;
-
-  @media (max-width: $breakpoint-xs-min) {
-    display: none;
-  }
-}
