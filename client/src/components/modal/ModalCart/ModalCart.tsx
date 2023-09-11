@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { removeCurrencyInfoFromCart } from '../../../store/cartSlice';
+import { removeCurrencyInfoFromCart, updateCart } from '../../../store/cartSlice';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { close } from '../../../store/modalCartSlice';
 import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';

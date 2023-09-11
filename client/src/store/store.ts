@@ -10,7 +10,6 @@ export const store = configureStore({
     modal: modalReducer,
     modalCart: modalCartReducer,
     cart: cartReducer,
-
     currencyInfo: currencyInfoReducer,
   },
 });

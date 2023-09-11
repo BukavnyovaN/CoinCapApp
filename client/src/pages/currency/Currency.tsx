@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../hooks/hooks';
 import { open } from '../../store/modalWindowSlice';
@@ -8,7 +8,6 @@ import {
   addCurrencySymbol,
   addCurrencyPriceUsd,
 } from '../../store/currencyInfoSlice';
-import { PATHS } from '../../constants/paths';
 import { convertToMillions } from '../../utils/convertToMillions';
 import { convertToPercentage } from '../../utils/convertToPercentage';
 import { convertToThousands } from '../../utils/convertToThousands';
@@ -19,8 +18,6 @@ import { trpc } from '../../utils/trpc';
 import './Currency.scss';
 
 export function Currency(){
-  const { NOT_FOUND } = PATHS;
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { currencyId } = useParams();
 

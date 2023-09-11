@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { TableHead, TableRow, Button, ModalWindow } from '../../components';
 import { trpc } from '../../utils/trpc';
 
@@ -11,9 +10,6 @@ export function Main() {
   const [offset, setOffset] = useState<number>(0);
   
   const currencyQuery = trpc.assets.useQuery({ids: '', limit, offset})
-
-  const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
-  const dispatch = useAppDispatch();
 
   const increaseOffset = () => {
     setOffset(offset + 10);
