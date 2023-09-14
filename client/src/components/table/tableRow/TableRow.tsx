@@ -1,12 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { IAssets } from '../../../store/cartSlice';
-import {
-  addCurrencyId,
-  addCurrencyName,
-  addCurrencySymbol,
-  addCurrencyPriceUsd,
-} from '../../../store/currencyInfoSlice';
 import { Button } from '../../button/Button';
 import { convertToMillions } from '../../../utils/convertToMillions';
 import { convertToPercentage } from '../../../utils/convertToPercentage';
@@ -15,6 +8,21 @@ import { useAppDispatch } from '../../../hooks/hooks';
 import { open } from '../../../store/modalWindowSlice';
 
 import './TableRow.scss';
+import { queryClient } from '../../../App';
+
+export interface IAssets {
+  id?: string;
+  rank: string;
+  symbol: string;
+  name: string;
+  supply: string;
+  maxSupply?: string;
+  marketCapUsd: string;
+  volumeUsd24Hr: string;
+  priceUsd?: any;
+  changePercent24Hr: string;
+  vwap24Hr: string;
+}
 
 export function TableRow ({
   id,
@@ -31,10 +39,7 @@ export function TableRow ({
   const dispatch = useAppDispatch();
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(id ? id : ''));
-    dispatch(addCurrencyName(name));
-    dispatch(addCurrencySymbol(symbol));
-    dispatch(addCurrencyPriceUsd(priceUsd));
+    queryClient.setQueryData(['currentCurrency'], id ? {'id' : id, "name" : name, "symbol" : symbol, "priceUsd" : priceUsd} : '')
     dispatch(open());
   };
   return (

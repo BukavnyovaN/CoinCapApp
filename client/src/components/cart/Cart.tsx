@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { ICart, handleTotalCart, updateCart } from '../../store/cartSlice';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { open } from '../../store/modalCartSlice';
-import { currenciesToDict } from '../../utils/groupCurrenciesByName';
+import { ICart, currenciesToDict } from '../../utils/groupCurrenciesByName';
 import { trpc } from '../../utils/trpc';
 
 import './Cart.scss';
@@ -17,24 +16,23 @@ export function Cart(){
     dispatch(open());
   };
 
-  const currentCartList = useAppSelector(({ cart }) => cart.cartList);
-  const currentCartTotal = useAppSelector(({ cart }) => cart.total);
-  const totalSum: number =
+  const localCartList: any = localStorage.getItem('newCurrentCartList') || null;
+
+  const currentCartList = JSON.parse(localCartList) || [];
+  const currentCartTotal: number =
     currentCartList.reduce(
-      (prev, next) => prev + +next.priceUsd * next.amount,
+      (prev: any, next: any) => prev + +next.priceUsd * next.amount,
       0
     ) || 0;
 
   const [difference, setDifference] = useState<number>(0);
   const [percentage, setPercentage] = useState<number>(0);
 
-  const ids = currentCartList.map(({ id }) => id).join(',');
+  const ids = currentCartList.map(({ id } : any) => id).join(',');
   const currencies = trpc.assets.useQuery({ids});
 
   useEffect(() => {
     if (currencies.data) {
-      dispatch(updateCart(currencies.data));
-
       if (currentCartList.length) {
         const groupedBoughtCurrenciesDict = currenciesToDict(currentCartList);
         let actualTotalPrice = 0;
@@ -44,15 +42,14 @@ export function Cart(){
           actualTotalPrice += +actualCurrency.priceUsd * boughtCurrency.amount;
         });
 
-        setDifference(actualTotalPrice - totalSum);
-        setPercentage((actualTotalPrice / totalSum - 1) * 100);
+        setDifference(actualTotalPrice - currentCartTotal);
+        setPercentage((actualTotalPrice / currentCartTotal - 1) * 100);
       }
     }
   }, [currencies.data]);
 
   useEffect(() => {
-    localStorage.setItem('currentCartList', JSON.stringify(currentCartList));
-    dispatch(handleTotalCart(totalSum));
+    localStorage.setItem('newCurrentCartList', JSON.stringify(currentCartList));
   }, [currentCartList]);
 
   useEffect(() => {

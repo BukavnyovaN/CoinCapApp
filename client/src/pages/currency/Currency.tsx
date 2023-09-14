@@ -2,12 +2,6 @@ import { useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../hooks/hooks';
 import { open } from '../../store/modalWindowSlice';
-import {
-  addCurrencyId,
-  addCurrencyName,
-  addCurrencySymbol,
-  addCurrencyPriceUsd,
-} from '../../store/currencyInfoSlice';
 import { convertToMillions } from '../../utils/convertToMillions';
 import { convertToPercentage } from '../../utils/convertToPercentage';
 import { convertToThousands } from '../../utils/convertToThousands';
@@ -16,13 +10,13 @@ import { Chart, Button, ModalWindow } from '../../components';
 import { trpc } from '../../utils/trpc';
 
 import './Currency.scss';
+import { queryClient } from '../../App';
 
 export function Currency(){
   const dispatch = useAppDispatch();
   const { currencyId } = useParams();
 
-  const currencyInfo = trpc.currencyInfo.useQuery({id: currencyId})
-
+  const {data, isLoading, isError, error} = trpc.currencyInfo.useQuery({id: currencyId})
   
   const currencyHistory = trpc.history.useQuery({
     id: currencyId,
@@ -35,43 +29,42 @@ export function Currency(){
   ) : [];
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(currencyInfo ? currencyInfo.data.id! : ''));
-    dispatch(addCurrencyName(currencyInfo ? currencyInfo.data.name : ''));
-    dispatch(addCurrencySymbol(currencyInfo ? currencyInfo.data.symbol : ''));
-    dispatch(addCurrencyPriceUsd(currencyInfo ?currencyInfo.data.priceUsd : ''));
+    queryClient.setQueryData(['currentCurrency'], data ? {...data} : '')
+
     dispatch(open());
   };
 
   return (
     <div className='page-currency'>
-      {currencyInfo.isLoading && <div>Loading...</div>}
-      {!currencyInfo.isLoading && currencyInfo.data && (
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Some error has occured: {error.message}</div>}
+      {!isLoading && data && (
         <>
           <div className='page-currency__info'>
             <div className='page-currency__info-circle'>
               <h4>Rank</h4>
-              <h5>{currencyInfo.data.rank}</h5>
+              <h5>{data.rank}</h5>
             </div>
             <div className='page-currency__info-circle'>
-              <h4>{`${currencyInfo.data.name} (${currencyInfo.data.symbol})`}</h4>
+              <h4>{`${data.name} (${data.symbol})`}</h4>
               <h5>
-                {convertToThousands(currencyInfo.data.priceUsd)} (
-                {`${convertToPercentage(currencyInfo.data.changePercent24Hr)}%`})
+                {convertToThousands(data.priceUsd)} (
+                {`${convertToPercentage(data.changePercent24Hr)}%`})
               </h5>
             </div>
             <div className='page-currency__info-circle'>
               <h4>Market Cap</h4>
-              <h5>{convertToMillions(currencyInfo.data.marketCapUsd)}</h5>
+              <h5>{convertToMillions(data.marketCapUsd)}</h5>
             </div>
             <div className='page-currency__info-circle'>
               <h4>Supply</h4>
-              <h5>{`${convertToMillions(currencyInfo.data.supply)} ${
-                currencyInfo.data.symbol
+              <h5>{`${convertToMillions(data.supply)} ${
+                data.symbol
               }`}</h5>
             </div>
             <div className='page-currency__info-circle'>
               <h4>Volume (24Hr)</h4>
-              <h5>{convertToMillions(currencyInfo.data.volumeUsd24Hr)}</h5>
+              <h5>{convertToMillions(data.volumeUsd24Hr)}</h5>
             </div>
             <Button
               className='button_secondary'
@@ -83,7 +76,7 @@ export function Currency(){
           <Chart
             labelsChart={labelsChart}
             dataChart={dataChart}
-            name={currencyInfo.data.name}
+            name={data.name}
           />
         </>
       )}

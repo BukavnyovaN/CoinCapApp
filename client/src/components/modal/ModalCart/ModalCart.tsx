@@ -3,28 +3,38 @@ import { Icon } from '@iconify/react';
 
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { removeCurrencyInfoFromCart, updateCart } from '../../../store/cartSlice';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { close } from '../../../store/modalCartSlice';
-import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
+import { ICart, groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
 
 import './ModalCart.scss';
+import { queryClient } from '../../../App';
+import { useEffect, useState } from 'react';
+import { refreshCartList, updadeTotal } from '../../../utils/trpc';
 
 export function ModalCart() {
   const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);
-  const currentCartList = useAppSelector(({ cart }) => cart.cartList);
-  const currentCartTotal = useAppSelector(({ cart }) => cart.total);
+  const [data, setData] = useState(0)
+  const currentCartList = queryClient.getQueryData<ICart[]>([`currentCartList`]) || [];
+  const currentCartTotal = localStorage.getItem('currentCartTotal') || 0;
+
+
   const dispatch = useAppDispatch();
 
   const closeModal = () => {
     dispatch(close());
   };
 
-  const deleteCurrency = (value: string) => {
-    dispatch(removeCurrencyInfoFromCart(value));
-  };
+  let groupedCurrenciesList = groupCurrenciesByName(currentCartList);
 
-  const groupedCurrenciesList = groupCurrenciesByName(currentCartList);
+  const deleteCurrency = (value: any) => {
+    let cartList = groupedCurrenciesList.filter(({ id }: any) => id !== value);
+    localStorage.setItem('newCurrentCartList', JSON.stringify(cartList))
+    refreshCartList();
+    updadeTotal(cartList)
+    setData(data+1)
+   };
+   
 
   return (
     <>
@@ -40,7 +50,7 @@ export function ModalCart() {
           groupedCurrenciesList.map(
             ({ id, name, symbol, priceUsd, amount, datetime }) => {
               return (
-                <div key={datetime} className='modal-cart__currencies'>
+                <div key={id} className='modal-cart__currencies'>
                   <Link
                     to={`/CoinCapApp/currency/${id}`}
                     className='modal-cart__currencies-name'
@@ -93,3 +103,4 @@ export function ModalCart() {
     </>
   );
 };
+

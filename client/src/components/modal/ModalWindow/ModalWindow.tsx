@@ -4,16 +4,16 @@ import { Icon } from '@iconify/react';
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { close } from '../../../store/modalWindowSlice';
-import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
-import { addCurrencyInfoToCart } from '../../../store/cartSlice';
 
 import './ModalWindow.scss';
+import { queryClient } from '../../../App';
+import { addCurrencyToCart } from '../../../utils/trpc';
 
 export function ModalWindow(){
   const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
-  const { id, name, symbol, priceUsd } = useAppSelector(
-    ({ currencyInfo }) => currencyInfo
-  );
+  const { id, name, symbol, priceUsd } : any = (queryClient.getQueryData(['currentCurrency']) || {})
+
+
   const dispatch = useAppDispatch();
 
   const [amount, setAmount] = useState<number>(1);
@@ -26,16 +26,14 @@ export function ModalWindow(){
     const target = event.target as HTMLInputElement;
     const value = +target.value as number;
     if (value > 0 && value < 1000) {
-      dispatch(addCurrencyAmount(amount));
       setAmount(value);
     }
   };
 
   const handleSubmit = () => {
     const datetime = new Date().getTime();
-    dispatch(
-      addCurrencyInfoToCart({ id, name, symbol, priceUsd, amount, datetime })
-    );
+    const currentCurrency = { 'id' : id, "name" : name, "symbol" : symbol, "priceUsd" : priceUsd, "amount" : amount, "datetime" : datetime }
+    addCurrencyToCart(currentCurrency)
     closeModal();
   };
 

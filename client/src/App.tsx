@@ -3,33 +3,36 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import React, { useState } from 'react';
 
-import { trpc } from './utils/trpc';
+import { refreshCartList, trpc } from './utils/trpc';
 import { Main, Currency, NotFound } from './pages';
 import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
 import { useOverflow } from './hooks/useOverflow';
 import { configs } from "./configs";
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+      keepPreviousData: true,
+    },
+  },
+});
+
+const trpcClient = trpc.createClient({
+  links: [
+    httpBatchLink({
+      url: configs.http.serverUrl
+    })
+  ]
+})
+
+queryClient.setQueryData([`cartList`], [])
 
 function App() {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false, // default: true
-        keepPreviousData: true,
-      },
-    },
-  }));
-  const [trpcClient] = useState(() => trpc.createClient({
-    links: [
-      httpBatchLink({
-        url: configs.http.serverUrl
-      })
-    ]
-  }))
-
   const { MAIN, ANY, CURRENCY, NOT_FOUND } = PATHS;
   useOverflow();
+  refreshCartList();
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>

@@ -1,8 +1,15 @@
-import { ICart } from '../store/cartSlice';
+export interface ICart {
+    id: string | undefined;
+    name?: any;
+    symbol: any;
+    priceUsd?: any;
+    amount: number;
+    datetime: number;
+}
 
 export const currenciesToDict = (
   currentCartList: ICart[]
-): { [key: string]: ICart } => {
+): { [key: string ]: ICart } => {
   const groupedCurrencies: { [key: string]: ICart } = {};
   currentCartList.forEach((currencyCart: ICart) => {
     if (!groupedCurrencies[currencyCart.name]) {

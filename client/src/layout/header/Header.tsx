@@ -49,7 +49,7 @@ export function Header() {
           />
           <p className='header__logo-name'>COIN CAP APP</p>
         </Link>
-        <Cart />
+        <Cart/>
       </header>
       <ModalCart />
     </>
