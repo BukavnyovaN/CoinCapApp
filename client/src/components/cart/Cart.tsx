@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { ICart, handleTotalCart, updateCart } from '../../store/cartSlice';
 import { convertToThousands } from '../../utils/convertToThousands';
-import { open } from '../../store/modalCartSlice';
 import { currenciesToDict } from '../../utils/groupCurrenciesByName';
 import { trpc } from '../../utils/trpc';
+import { ModalCartContext } from '../../context';
 
 import './Cart.scss';
 
 export function Cart(){
+  const { openModalCart } = useContext(ModalCartContext);
+
   const dispatch = useAppDispatch();
 
   const openModal = () => {
-    dispatch(open());
+    openModalCart();
   };
 
   const currentCartList = useAppSelector(({ cart }) => cart.cartList);

@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Icon } from '@iconify/react';
 
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { close } from '../../../store/modalWindowSlice';
 import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
 import { addCurrencyInfoToCart } from '../../../store/cartSlice';
+import { ModalWindowContext } from '../../../context';
 
 import './ModalWindow.scss';
 
-export function ModalWindow(){
-  const isModalAddOpen = useAppSelector(({ modal }) => modal.value);
+export function ModalWindow({isModalWindowOpen}: any){
+  const { closeModalWindow } = useContext(ModalWindowContext);
+  const isModalAddOpen = isModalWindowOpen || false;
   const { id, name, symbol, priceUsd } = useAppSelector(
     ({ currencyInfo }) => currencyInfo
   );
@@ -19,7 +20,7 @@ export function ModalWindow(){
   const [amount, setAmount] = useState<number>(1);
 
   const closeModal = () => {
-    dispatch(close());
+    closeModalWindow();
   };
 
   const handleInputNumber = (event: any) => {

@@ -20,7 +20,7 @@ export interface ICart {
   name: string;
   symbol: string;
   priceUsd: string;
-  amount: number;
+  amount: any;
   datetime: number;
 }
 

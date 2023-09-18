@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
 import { IAssets } from '../../../store/cartSlice';
 import {
@@ -12,7 +13,7 @@ import { convertToMillions } from '../../../utils/convertToMillions';
 import { convertToPercentage } from '../../../utils/convertToPercentage';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { useAppDispatch } from '../../../hooks/hooks';
-import { open } from '../../../store/modalWindowSlice';
+import { ModalWindowContext } from '../../../context';
 
 import './TableRow.scss';
 
@@ -29,13 +30,14 @@ export function TableRow ({
   changePercent24Hr,
 } : IAssets) {
   const dispatch = useAppDispatch();
+  const { openModalWindow } = useContext(ModalWindowContext);
 
   const handleCurrency = () => {
     dispatch(addCurrencyId(id ? id : ''));
     dispatch(addCurrencyName(name));
     dispatch(addCurrencySymbol(symbol));
     dispatch(addCurrencyPriceUsd(priceUsd));
-    dispatch(open());
+    openModalWindow();
   };
   return (
     <tr className='table-row'>
