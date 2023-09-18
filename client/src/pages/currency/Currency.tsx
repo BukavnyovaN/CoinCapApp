@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 import { useAppDispatch } from '../../hooks/hooks';
-import { open } from '../../store/modalWindowSlice';
 import {
   addCurrencyId,
   addCurrencyName,
@@ -14,12 +14,14 @@ import { convertToThousands } from '../../utils/convertToThousands';
 import { convertToDate } from '../../utils/convertToDate';
 import { Chart, Button, ModalWindow } from '../../components';
 import { trpc } from '../../utils/trpc';
+import { ModalWindowContext } from '../../context';
 
 import './Currency.scss';
 
 export function Currency(){
   const dispatch = useAppDispatch();
   const { currencyId } = useParams();
+  const { openModalWindow } = useContext(ModalWindowContext);
 
   const currencyInfo = trpc.currencyInfo.useQuery({id: currencyId})
 
@@ -39,7 +41,7 @@ export function Currency(){
     dispatch(addCurrencyName(currencyInfo ? currencyInfo.data.name : ''));
     dispatch(addCurrencySymbol(currencyInfo ? currencyInfo.data.symbol : ''));
     dispatch(addCurrencyPriceUsd(currencyInfo ?currencyInfo.data.priceUsd : ''));
-    dispatch(open());
+    openModalWindow();
   };
 
   return (

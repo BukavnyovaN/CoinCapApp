@@ -7,8 +7,10 @@ import { trpc } from './utils/trpc';
 import { Main, Currency, NotFound } from './pages';
 import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
-import { useOverflow } from './hooks/useOverflow';
 import { configs } from "./configs";
+import { ModalWindowProvider } from './context';
+import { ModalCartProvider } from './context/modalCartContext/ModalCartContextProvider';
+import { AllProviders } from './context/AppContextProvider';
 
 
 function App() {
@@ -29,20 +31,21 @@ function App() {
   }))
 
   const { MAIN, ANY, CURRENCY, NOT_FOUND } = PATHS;
-  useOverflow();
-
+  
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Routes>
-            <Route path={MAIN} element={<Layout/>}>
-              <Route index element={<Main/>}/>
-              <Route path={CURRENCY} element={<Currency/>}/>
-              <Route path={NOT_FOUND} element={<NotFound/>}/>
-              <Route path={ANY} element={<NotFound/>}/>
-            </Route>
-          </Routes>
+          <AllProviders> 
+            <Routes>
+              <Route path={MAIN} element={<Layout/>}>
+                <Route index element={<Main/>}/>
+                <Route path={CURRENCY} element={<Currency/>}/>
+                <Route path={NOT_FOUND} element={<NotFound/>}/>
+                <Route path={ANY} element={<NotFound/>}/>
+              </Route>
+            </Routes>
+          </AllProviders>
         </BrowserRouter>
       </QueryClientProvider>
     </trpc.Provider>

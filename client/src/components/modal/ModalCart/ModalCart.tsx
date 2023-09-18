@@ -1,23 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
+import { useContext } from 'react';
 
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { removeCurrencyInfoFromCart, updateCart } from '../../../store/cartSlice';
+import { removeCurrencyInfoFromCart } from '../../../store/cartSlice';
 import { convertToThousands } from '../../../utils/convertToThousands';
-import { close } from '../../../store/modalCartSlice';
 import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
+import { ModalCartContext } from '../../../context';
 
 import './ModalCart.scss';
 
-export function ModalCart() {
-  const isModalCartOpen = useAppSelector(({ modalCart }) => modalCart.value);
+export function ModalCart({isModalCartOpened}:any) {
+  const { closeModalCart } = useContext(ModalCartContext);
+  const isModalCartOpen = isModalCartOpened || false;
   const currentCartList = useAppSelector(({ cart }) => cart.cartList);
   const currentCartTotal = useAppSelector(({ cart }) => cart.total);
   const dispatch = useAppDispatch();
 
   const closeModal = () => {
-    dispatch(close());
+    closeModalCart();
   };
 
   const deleteCurrency = (value: string) => {
