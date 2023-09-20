@@ -1,4 +1,4 @@
-import React, { ComponentProps, ComponentType, FC } from 'react';
+import React, { ComponentProps, ComponentType } from 'react';
 
 import { ModalWindowProvider } from './modalWindowContext';
 import { ModalCartProvider } from './modalCartContext';

@@ -1,15 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { trpc } from './utils/trpc';
 import { Main, Currency, NotFound } from './pages';
 import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
 import { configs } from "./configs";
-import { ModalWindowProvider } from './context';
-import { ModalCartProvider } from './context/modalCartContext/ModalCartContextProvider';
 import { AllProviders } from './context/AppContextProvider';
 
 
