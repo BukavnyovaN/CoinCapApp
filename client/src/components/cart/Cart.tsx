@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { currenciesToDict } from '../../utils/groupCurrenciesByName';
 import { trpc } from '../../utils/trpc';
@@ -52,15 +52,6 @@ export function Cart(){
       }
     }
   }, [currencies.data]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('currentCartList', JSON.stringify(currentCartList));
-  //   dispatch(handleTotalCart(totalSum));
-  // }, [currentCartList]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('currentCartTotal', JSON.stringify(currentCartTotal));
-  // }, [currentCartTotal]);
 
   return (
     <div className='cart' onClick={openModal}>
