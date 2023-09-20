@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 
-import { IAssets } from '../../../store/cartSlice';
 import {
   addCurrencyId,
   addCurrencyName,
@@ -16,6 +15,20 @@ import { useAppDispatch } from '../../../hooks/hooks';
 import { ModalWindowContext } from '../../../context';
 
 import './TableRow.scss';
+
+export interface IAssets {
+  id?: string;
+  rank: string;
+  symbol: string;
+  name: string;
+  supply: string;
+  maxSupply?: string;
+  marketCapUsd: string;
+  volumeUsd24Hr: string;
+  priceUsd: string;
+  changePercent24Hr: string;
+  vwap24Hr: string;
+}
 
 export function TableRow ({
   id,

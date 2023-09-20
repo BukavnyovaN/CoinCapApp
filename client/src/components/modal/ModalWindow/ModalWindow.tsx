@@ -4,13 +4,14 @@ import { Icon } from '@iconify/react';
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
-import { addCurrencyInfoToCart } from '../../../store/cartSlice';
 import { ModalWindowContext } from '../../../context';
 
 import './ModalWindow.scss';
+import { CartContext } from '../../../context/cartContext/CartContext';
 
 export function ModalWindow({isModalWindowOpen}: any){
   const { closeModalWindow } = useContext(ModalWindowContext);
+  const { addToCart } = useContext(CartContext)
   const isModalAddOpen = isModalWindowOpen || false;
   const { id, name, symbol, priceUsd } = useAppSelector(
     ({ currencyInfo }) => currencyInfo
@@ -34,9 +35,8 @@ export function ModalWindow({isModalWindowOpen}: any){
 
   const handleSubmit = () => {
     const datetime = new Date().getTime();
-    dispatch(
-      addCurrencyInfoToCart({ id, name, symbol, priceUsd, amount, datetime })
-    );
+    const item = { id, name, symbol, priceUsd, amount, datetime };
+    addToCart(item);
     closeModal();
   };
 

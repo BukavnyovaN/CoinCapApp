@@ -4,18 +4,19 @@ import { useContext } from 'react';
 
 import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { removeCurrencyInfoFromCart } from '../../../store/cartSlice';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
 import { ModalCartContext } from '../../../context';
 
 import './ModalCart.scss';
+import { CartContext } from '../../../context/cartContext/CartContext';
 
 export function ModalCart({isModalCartOpened}:any) {
   const { closeModalCart } = useContext(ModalCartContext);
+  const {cartList, total, removeFromCart} = useContext(CartContext)
   const isModalCartOpen = isModalCartOpened || false;
-  const currentCartList = useAppSelector(({ cart }) => cart.cartList);
-  const currentCartTotal = useAppSelector(({ cart }) => cart.total);
+  const currentCartList = cartList;
+  const currentCartTotal = total;
   const dispatch = useAppDispatch();
 
   const closeModal = () => {
@@ -23,7 +24,7 @@ export function ModalCart({isModalCartOpened}:any) {
   };
 
   const deleteCurrency = (value: string) => {
-    dispatch(removeCurrencyInfoFromCart(value));
+    removeFromCart(value);
   };
 
   const groupedCurrenciesList = groupCurrenciesByName(currentCartList);
@@ -40,7 +41,7 @@ export function ModalCart({isModalCartOpened}:any) {
         )}
         {groupedCurrenciesList &&
           groupedCurrenciesList.map(
-            ({ id, name, symbol, priceUsd, amount, datetime }) => {
+            ({ id, name, symbol, priceUsd, amount, datetime }: any) => {
               return (
                 <div key={datetime} className='modal-cart__currencies'>
                   <Link
@@ -64,7 +65,7 @@ export function ModalCart({isModalCartOpened}:any) {
                   )}`}</div>
                   <button
                     className='button_delete'
-                    onClick={() => deleteCurrency(id)}
+                    onClick={() => deleteCurrency(name)}
                   >
                     <Icon
                       icon='cil:trash'
