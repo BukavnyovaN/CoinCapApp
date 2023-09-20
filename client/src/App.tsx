@@ -9,6 +9,7 @@ import { PATHS } from './constants/paths';
 import { Layout } from './layout/Layout';
 import { configs } from "./configs";
 import { AllProviders } from './context/AppContextProvider';
+import { CartProvider } from './context/cartContext/CartContext';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
+        <CartProvider>
           <AllProviders> 
             <Routes>
               <Route path={MAIN} element={<Layout/>}>
@@ -44,6 +46,7 @@ function App() {
               </Route>
             </Routes>
           </AllProviders>
+          </CartProvider>
         </BrowserRouter>
       </QueryClientProvider>
     </trpc.Provider>

@@ -2,16 +2,19 @@ import { useContext, useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { ICart, handleTotalCart, updateCart } from '../../store/cartSlice';
 import { convertToThousands } from '../../utils/convertToThousands';
 import { currenciesToDict } from '../../utils/groupCurrenciesByName';
 import { trpc } from '../../utils/trpc';
 import { ModalCartContext } from '../../context';
+import { ICart } from '../../utils/groupCurrenciesByName';
 
 import './Cart.scss';
+import { CartContext } from '../../context/cartContext/CartContext';
 
 export function Cart(){
   const { openModalCart } = useContext(ModalCartContext);
+  const {total} = useContext(CartContext);
+  const {cartList} = useContext(CartContext);
 
   const dispatch = useAppDispatch();
 
@@ -19,24 +22,22 @@ export function Cart(){
     openModalCart();
   };
 
-  const currentCartList = useAppSelector(({ cart }) => cart.cartList);
-  const currentCartTotal = useAppSelector(({ cart }) => cart.total);
+  const currentCartList: any = cartList || [];
+  const currentCartTotal = total || '0';
   const totalSum: number =
     currentCartList.reduce(
-      (prev, next) => prev + +next.priceUsd * next.amount,
+      (prev: any, next: any) => prev + +next.priceUsd * next.amount,
       0
     ) || 0;
 
   const [difference, setDifference] = useState<number>(0);
   const [percentage, setPercentage] = useState<number>(0);
 
-  const ids = currentCartList.map(({ id }) => id).join(',');
+  const ids = currentCartList.map(({ id }: any) => id).join(',');
   const currencies = trpc.assets.useQuery({ids});
 
   useEffect(() => {
     if (currencies.data) {
-      dispatch(updateCart(currencies.data));
-
       if (currentCartList.length) {
         const groupedBoughtCurrenciesDict = currenciesToDict(currentCartList);
         let actualTotalPrice = 0;
@@ -52,14 +53,14 @@ export function Cart(){
     }
   }, [currencies.data]);
 
-  useEffect(() => {
-    localStorage.setItem('currentCartList', JSON.stringify(currentCartList));
-    dispatch(handleTotalCart(totalSum));
-  }, [currentCartList]);
+  // useEffect(() => {
+  //   localStorage.setItem('currentCartList', JSON.stringify(currentCartList));
+  //   dispatch(handleTotalCart(totalSum));
+  // }, [currentCartList]);
 
-  useEffect(() => {
-    localStorage.setItem('currentCartTotal', JSON.stringify(currentCartTotal));
-  }, [currentCartTotal]);
+  // useEffect(() => {
+  //   localStorage.setItem('currentCartTotal', JSON.stringify(currentCartTotal));
+  // }, [currentCartTotal]);
 
   return (
     <div className='cart' onClick={openModal}>
