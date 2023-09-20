@@ -3,13 +3,12 @@ import { Icon } from '@iconify/react';
 import { useContext } from 'react';
 
 import { Button } from '../../button/Button';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { convertToThousands } from '../../../utils/convertToThousands';
 import { groupCurrenciesByName } from '../../../utils/groupCurrenciesByName';
 import { ModalCartContext } from '../../../context';
+import { CartContext } from '../../../context/cartContext/CartContext';
 
 import './ModalCart.scss';
-import { CartContext } from '../../../context/cartContext/CartContext';
 
 export function ModalCart({isModalCartOpened}:any) {
   const { closeModalCart } = useContext(ModalCartContext);
@@ -17,7 +16,6 @@ export function ModalCart({isModalCartOpened}:any) {
   const isModalCartOpen = isModalCartOpened || false;
   const currentCartList = cartList;
   const currentCartTotal = total;
-  const dispatch = useAppDispatch();
 
   const closeModal = () => {
     closeModalCart();

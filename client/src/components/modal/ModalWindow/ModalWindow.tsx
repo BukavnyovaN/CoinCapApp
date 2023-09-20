@@ -5,9 +5,9 @@ import { Button } from '../../button/Button';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
 import { ModalWindowContext } from '../../../context';
+import { CartContext } from '../../../context/cartContext/CartContext';
 
 import './ModalWindow.scss';
-import { CartContext } from '../../../context/cartContext/CartContext';
 
 export function ModalWindow({isModalWindowOpen}: any){
   const { closeModalWindow } = useContext(ModalWindowContext);
