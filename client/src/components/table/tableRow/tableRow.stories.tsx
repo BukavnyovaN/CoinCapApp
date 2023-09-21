@@ -5,8 +5,7 @@ import {
   reactRouterParameters,
   withRouter,
 } from 'storybook-addon-react-router-v6';
-
-import { store } from '../../../store/store';
+import { CurrencyProvider } from '../../../context/currencyContext/CurrencyContext';
 
 import './TableRow.scss';
 
@@ -36,9 +35,9 @@ export const Bitcoin: Story = {
   },
   decorators: [
     (Story) => (
-      <Provider store={store}>
+      <CurrencyProvider>
         <Story />
-      </Provider>
+      </CurrencyProvider>
     ),
   ],
   parameters: {

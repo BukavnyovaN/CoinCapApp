@@ -2,21 +2,18 @@ import { useContext, useState } from 'react';
 import { Icon } from '@iconify/react';
 
 import { Button } from '../../button/Button';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { addCurrencyAmount } from '../../../store/currencyInfoSlice';
 import { ModalWindowContext } from '../../../context';
 import { CartContext } from '../../../context/cartContext/CartContext';
+import { CurrencyContext } from '../../../context/currencyContext/CurrencyContext';
 
 import './ModalWindow.scss';
+import { ICart } from '../../../context/cartContext/CartReducer';
 
 export function ModalWindow({isModalWindowOpen}: any){
   const { closeModalWindow } = useContext(ModalWindowContext);
   const { addToCart } = useContext(CartContext)
   const isModalAddOpen = isModalWindowOpen || false;
-  const { id, name, symbol, priceUsd } = useAppSelector(
-    ({ currencyInfo }) => currencyInfo
-  );
-  const dispatch = useAppDispatch();
+  const { id, name, symbol, priceUsd, addCurrencyAmount } = useContext(CurrencyContext)
 
   const [amount, setAmount] = useState<number>(1);
 
@@ -28,7 +25,7 @@ export function ModalWindow({isModalWindowOpen}: any){
     const target = event.target as HTMLInputElement;
     const value = +target.value as number;
     if (value > 0 && value < 1000) {
-      dispatch(addCurrencyAmount(amount));
+      addCurrencyAmount(amount);
       setAmount(value);
     }
   };
