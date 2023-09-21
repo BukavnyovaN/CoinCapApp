@@ -1,8 +1,14 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import cartReducer, { initialState } from "./CartReducer";
 import { any } from "prop-types";
+import { ICart } from "./CartReducer";
 
-export const CartContext = createContext({ total: any, cartList: any, addToCart: (item: any) => {}, removeFromCart: (item: any) => {} });
+export const CartContext = createContext({ 
+    total: any, 
+    cartList: any, 
+    addToCart: (item: any) => {}, 
+    removeFromCart: (name: string) => {} 
+});
 
 export const CartProvider = ({children}: any) => {
     const [state, dispatch] = useReducer(cartReducer, initialState);
@@ -13,24 +19,22 @@ export const CartProvider = ({children}: any) => {
         localStorage.setItem('currentCartList', JSON.stringify(updatedCart));
         getTotal(updatedCart)
         dispatch({
-            type: 'add',
+            type: 'ADD_TO_CART',
             payload: updatedCart,
         })
-        console.log(state)
     }
 
-    const removeFromCart = (name: any) => {
-        const updatedCart = state.cartList.filter((elem: any) => elem.name !== name)
-        console.log(updatedCart)
+    const removeFromCart = (name: string) => {
+        const updatedCart = state.cartList.filter((elem: ICart) => elem.name !== name)
         localStorage.setItem('currentCartList', JSON.stringify(updatedCart));
         getTotal(updatedCart)
         dispatch({
-            type: 'remove',
+            type: 'REMOVE_FROM_CART',
             payload: updatedCart,
         })
     }
 
-    const getTotal = (cartList: any) => {
+    const getTotal = (cartList: ICart[]) => {
         let total = cartList.reduce(
             (prev: any, next: any) => prev + +next.priceUsd * next.amount,
             0
@@ -38,7 +42,7 @@ export const CartProvider = ({children}: any) => {
         localStorage.setItem('currentCartTotal', JSON.stringify(total));
 
         dispatch({
-            type: 'getTotal',
+            type: 'GET_TOTAL',
             payload: total,
         })
     }

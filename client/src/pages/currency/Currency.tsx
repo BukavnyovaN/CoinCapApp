@@ -1,13 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 
-import { useAppDispatch } from '../../hooks/hooks';
-import {
-  addCurrencyId,
-  addCurrencyName,
-  addCurrencySymbol,
-  addCurrencyPriceUsd,
-} from '../../store/currencyInfoSlice';
 import { convertToMillions } from '../../utils/convertToMillions';
 import { convertToPercentage } from '../../utils/convertToPercentage';
 import { convertToThousands } from '../../utils/convertToThousands';
@@ -15,13 +8,14 @@ import { convertToDate } from '../../utils/convertToDate';
 import { Chart, Button, ModalWindow } from '../../components';
 import { trpc } from '../../utils/trpc';
 import { ModalWindowContext } from '../../context';
+import { CurrencyContext } from '../../context/currencyContext/CurrencyContext';
 
 import './Currency.scss';
 
 export function Currency(){
-  const dispatch = useAppDispatch();
   const { currencyId } = useParams();
   const { openModalWindow } = useContext(ModalWindowContext);
+  const {addCurrencyId, addCurrencyName, addCurrencySymbol, addCurrencyPriceUsd} = useContext(CurrencyContext)
 
   const currencyInfo = trpc.currencyInfo.useQuery({id: currencyId})
 
@@ -37,10 +31,10 @@ export function Currency(){
   ) : [];
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(currencyInfo ? currencyInfo.data.id! : ''));
-    dispatch(addCurrencyName(currencyInfo ? currencyInfo.data.name : ''));
-    dispatch(addCurrencySymbol(currencyInfo ? currencyInfo.data.symbol : ''));
-    dispatch(addCurrencyPriceUsd(currencyInfo ?currencyInfo.data.priceUsd : ''));
+    addCurrencyId(currencyInfo ? currencyInfo.data.id! : '');
+    addCurrencyName(currencyInfo ? currencyInfo.data.name : '');
+    addCurrencySymbol(currencyInfo ? currencyInfo.data.symbol : '');
+    addCurrencyPriceUsd(currencyInfo ?currencyInfo.data.priceUsd : '');
     openModalWindow();
   };
 

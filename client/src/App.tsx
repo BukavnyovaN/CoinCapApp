@@ -10,7 +10,7 @@ import { Layout } from './layout/Layout';
 import { configs } from "./configs";
 import { AllProviders } from './context/AppContextProvider';
 import { CartProvider } from './context/cartContext/CartContext';
-
+import { CurrencyProvider } from './context/currencyContext/CurrencyContext';
 
 function App() {
   const [queryClient] = useState(() => new QueryClient({
@@ -35,18 +35,20 @@ function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-        <CartProvider>
-          <AllProviders> 
-            <Routes>
-              <Route path={MAIN} element={<Layout/>}>
-                <Route index element={<Main/>}/>
-                <Route path={CURRENCY} element={<Currency/>}/>
-                <Route path={NOT_FOUND} element={<NotFound/>}/>
-                <Route path={ANY} element={<NotFound/>}/>
-              </Route>
-            </Routes>
-          </AllProviders>
-          </CartProvider>
+          <CurrencyProvider>
+            <CartProvider>
+              <AllProviders> 
+                <Routes>
+                  <Route path={MAIN} element={<Layout/>}>
+                    <Route index element={<Main/>}/>
+                    <Route path={CURRENCY} element={<Currency/>}/>
+                    <Route path={NOT_FOUND} element={<NotFound/>}/>
+                    <Route path={ANY} element={<NotFound/>}/>
+                  </Route>
+                </Routes>
+              </AllProviders>
+            </CartProvider>
+          </CurrencyProvider>
         </BrowserRouter>
       </QueryClientProvider>
     </trpc.Provider>

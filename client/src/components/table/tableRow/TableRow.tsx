@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 
-import {
-  addCurrencyId,
-  addCurrencyName,
-  addCurrencySymbol,
-  addCurrencyPriceUsd,
-} from '../../../store/currencyInfoSlice';
 import { Button } from '../../button/Button';
 import { convertToMillions } from '../../../utils/convertToMillions';
 import { convertToPercentage } from '../../../utils/convertToPercentage';
 import { convertToThousands } from '../../../utils/convertToThousands';
-import { useAppDispatch } from '../../../hooks/hooks';
 import { ModalWindowContext } from '../../../context';
+import { CurrencyContext } from '../../../context/currencyContext/CurrencyContext';
 
 import './TableRow.scss';
 
@@ -42,14 +36,15 @@ export function TableRow ({
   volumeUsd24Hr,
   changePercent24Hr,
 } : IAssets) {
-  const dispatch = useAppDispatch();
   const { openModalWindow } = useContext(ModalWindowContext);
+  const {addCurrencyId, addCurrencyName, addCurrencyPriceUsd, addCurrencySymbol} = useContext(CurrencyContext)
+ 
 
   const handleCurrency = () => {
-    dispatch(addCurrencyId(id ? id : ''));
-    dispatch(addCurrencyName(name));
-    dispatch(addCurrencySymbol(symbol));
-    dispatch(addCurrencyPriceUsd(priceUsd));
+    addCurrencyId(id ? id : '');
+    addCurrencyName(name);
+    addCurrencySymbol(symbol);
+    addCurrencyPriceUsd(priceUsd);
     openModalWindow();
   };
   return (

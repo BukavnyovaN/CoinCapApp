@@ -1,11 +1,4 @@
-export interface ICart {
-    id: string;
-    name: string;
-    symbol: string;
-    priceUsd: string;
-    amount: any;
-    datetime: number;
-}
+import { ICart } from "../context/cartContext/CartReducer";
 
 export const currenciesToDict = (
   currentCartList: ICart[]
